@@ -23,7 +23,7 @@
                 {{-- <th>Body</th> --}}
                 <th>Category</th>
                 <th>Created at</th>
-                <th>Options</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -58,7 +58,7 @@
                 {{-- <th>Body</th> --}}
                 <th>Category</th>
                 <th>Created at</th>
-                <th>Options</th>
+                <th>Actions</th>
               </tr>
             </tfoot>
           </table>

@@ -11,17 +11,17 @@
           </div>
         @endif
         <div class="card-header">
-          <h4>Manage Categories</h4>
+          <h4>Manage Users</h4>
         </div>
         <div class="card-body">
           <table id="categoriesTable" class="table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th>#</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Posts</th>
-                <th>Created at</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Level</th>
+                <th>Member Since</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -47,10 +47,10 @@
             <tfoot>
               <tr>
                 <th>#</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Posts</th>
-                <th>Created at</th>
+                <th>Name</th>
+                <th>Email Address</th>
+                <th>Level</th>
+                <th>Member Since</th>
                 <th>Actions</th>
               </tr>
             </tfoot>

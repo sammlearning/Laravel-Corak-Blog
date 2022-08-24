@@ -30,7 +30,7 @@
     <div class="col-md-2 p-0">
       <nav class="navbar navbar-dark navbar-expand-lg dashboard-sidebar">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{{route('home')}}"><img src="{{asset('images/header-logo-dark.png')}}" alt=""></a>
+          <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/header-logo-dark.png') }}" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -46,8 +46,8 @@
             </ul>
             <ul class="dashboard-list">
               <h6 class="dashboard-list-title">Users</h6>
-              <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
-                <a class="nav-link" href="#"><span class="dashboard-list-icon"><i class="bi bi-person-plus-fill"></i></span> Manage Users</a>
+              <li class="nav-item {{ Route::currentRouteName() == 'users.index' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-person-plus-fill"></i></span> Manage Users</a>
               </li>
               <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
                 <a class="nav-link" href="#"><span class="dashboard-list-icon"><i class="bi bi-people-fill"></i></span> Link</a>
@@ -56,24 +56,24 @@
             <ul class="dashboard-list">
               <h6 class="dashboard-list-title">Categories</h6>
               <li class="nav-item {{ Route::currentRouteName() == 'categories.index' || Route::currentRouteName() == 'categories.edit' ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('categories.index')}}"><span class="dashboard-list-icon"><i class="bi bi-bookmarks-fill"></i></span> Manage Categories</a>
+                <a class="nav-link" href="{{ route('categories.index') }}"><span class="dashboard-list-icon"><i class="bi bi-bookmarks-fill"></i></span> Manage Categories</a>
               </li>
               <li class="nav-item {{ Route::currentRouteName() == 'categories.create' ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('categories.create')}}"><span class="dashboard-list-icon"><i class="bi bi-bookmark-plus-fill"></i></span> New Category</a>
+                <a class="nav-link" href="{{ route('categories.create') }}"><span class="dashboard-list-icon"><i class="bi bi-bookmark-plus-fill"></i></span> New Category</a>
               </li>
             </ul>
             <ul class="dashboard-list">
               <h6 class="dashboard-list-title">Posts</h6>
               <li class="nav-item {{ Route::currentRouteName() == 'posts.index' || Route::currentRouteName() == 'posts.edit' ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('posts.index')}}"><span class="dashboard-list-icon"><i class="bi bi-file-bar-graph-fill"></i></span> Manage Posts</a>
+                <a class="nav-link" href="{{ route('posts.index') }}"><span class="dashboard-list-icon"><i class="bi bi-file-bar-graph-fill"></i></span> Manage Posts</a>
               </li>
               <li class="nav-item {{ Route::currentRouteName() == 'posts.create' ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('posts.create')}}"><span class="dashboard-list-icon"><i class="bi bi-file-richtext-fill"></i></span> New post</a>
+                <a class="nav-link" href="{{ route('posts.create') }}"><span class="dashboard-list-icon"><i class="bi bi-file-richtext-fill"></i></span> New post</a>
               </li>
             </ul>
             <ul class="dashboard-list">
               <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
-                <a class="nav-link" href="{{route('home')}}"><span class="dashboard-list-icon"><i class="bi bi-box-arrow-up-right"></i></span> View Blog</a>
+                <a class="nav-link" href="{{ route('home') }}"><span class="dashboard-list-icon"><i class="bi bi-box-arrow-up-right"></i></span> View Blog</a>
               </li>
             </ul>
           </div>

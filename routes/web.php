@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,11 +27,13 @@ Route::get('/posts', function () {
   return view('post');
 })->name('post');
 
-Route::get('/dashboard', function () {
-  return view('dashboard.index');
-})->middleware(['auth', 'admin'])->name('dashboard');
-
 Route::middleware(['auth', 'admin'])->group(function () {
-  Route::resource('dashboard/posts', PostController::class);
-  Route::resource('dashboard/categories', CategoryController::class);
+  Route::get('dashboard', function () {
+    return view('dashboard.index');
+  })->name('dashboard');
+  Route::resources([
+    'dashboard/posts' => PostController::class,
+    'dashboard/categories' => CategoryController::class,
+    'dashboard/users' => UserController::class,
+  ]);
 });
