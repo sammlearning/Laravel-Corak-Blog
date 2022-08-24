@@ -1,0 +1,26 @@
+@mixin primary_btn {
+  color: #fff;
+  background: $primary-color;
+  padding: 0.3rem 0.8rem;
+  border: 0;
+  border-radius: 0;
+}
+@mixin primary_btn_hover {
+  background: $primary-color-alt;
+  padding: 0.3rem 0.8rem;
+  border: 0;
+  border-radius: 0;
+}
+@mixin card_title {
+  color: #ffffff;
+  background-color: $secondary-color;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+@mixin card {
+  color: #555555;
+  background-color: #ffffff;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 4px rgb(222 222 222 / 25%);
+}

@@ -1,0 +1,66 @@
+.post-page {
+  @include card;
+  .post-title {
+    font-weight: bold;
+  }
+  .post-info {
+    padding: 1rem;
+  }
+  .post-img {
+    width: 100%;
+  }
+  .post-body {
+    padding: 1rem;
+    padding-bottom: 0;
+  }
+  .post-categories {
+    padding: 1rem;
+    padding-top: 0;
+    .post-category {
+      color: #ffffff;
+      background-color: $primary-color;
+    }
+  }
+}
+
+.post-page-comments {
+  .post-page-comments-title {
+    @include card_title;
+  }
+  margin: 1rem 0;
+  .add-comment {
+    background: #ffffff;
+    margin: 1rem;
+    form {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      img {
+        width: 75px;
+      }
+      .add_comment_btn {
+        @include primary_btn;
+      }
+      .add_comment_btn:hover {
+        @include primary_btn_hover;
+      }
+    }
+  }
+  .comments {
+    @include card;
+    padding-bottom: 1rem;
+    .comment {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      margin: 1rem;
+      img {
+        width: 75px;
+      }
+      .comment-info p {
+        margin: 0;
+      }
+    }
+  }
+}
