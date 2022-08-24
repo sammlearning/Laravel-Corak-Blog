@@ -20,24 +20,31 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Email Address</th>
+                <th>Posts</th>
                 <th>Level</th>
                 <th>Member Since</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              @foreach ($categories as $category)
+              @foreach ($users as $user)
                 <tr>
-                  <td>{{ $category->id }}</td>
-                  <td>{{ $category->title }}</td>
-                  <td>{{ $category->description }}</td>
-                  <td><span class="badge rounded-pill category-badge">{{ $category->posts_count }}</span></td>
-                  <td>{{ $category->created_at }}</td>
+                  <td>{{ $user->id }}</td>
+                  <td>{{ $user->name }}</td>
+                  <td>{{ $user->email }}</td>
+                  <td>{{ $user->posts_count }}</td>
                   <td>
-                    <form action="{{route('categories.destroy', $category->id)}}" method="POST">
+                  @if ($user->is_admin)
+                    <span class="badge rounded-pill bg-success">Admin</span></td>
+                  @else
+                    <span class="badge rounded-pill bg-light text-dark">User</span></td>
+                  @endif
+                  <td>{{ $user->created_at }}</td>
+                  <td>
+                    <form action="{{route('categories.destroy', $user->id)}}" method="POST">
                       @method('DELETE')
                       @csrf
-                      <a class="btn btn-sm btn-light me-2" href="{{ route('categories.edit', $category->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
+                      <a class="btn btn-sm btn-light me-2" href="{{ route('categories.edit', $user->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
                       <button class="btn btn-sm btn-light" type="submit"><i class="bi bi-trash3 me-1"></i> Delete</button>
                     </form>
                   </td>
@@ -49,6 +56,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Email Address</th>
+                <th>Posts</th>
                 <th>Level</th>
                 <th>Member Since</th>
                 <th>Actions</th>
