@@ -139,8 +139,10 @@
         display: flex;
         img {
           height: auto;
-          width: 100%;
+          width: auto;
           margin: auto;
+          margin-left: 0;
+          max-height: 50px;
         }
       }
     }

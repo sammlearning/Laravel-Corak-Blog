@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -60,7 +62,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
+      $user = User::findOrFail($id);
+      return view('dashboard.users.edit', ['user' => $user]);
+
     }
 
     /**
@@ -72,7 +77,39 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+      $user = User::findOrFail($id);
+
+      $validates = [
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+        'role' => 'required|integer',
+      ];
+
+      $data = [
+        'name' => $request->name,
+        'email' => $request->email,
+        'is_admin' => $request->role,
+      ];
+
+      // if (empty($request->password)) {
+        // Arr::add($validate, 'password', 'required|string|min:8');
+        Arr::add($data, 'password', Hash::make($request->password));
+      // }
+
+      // if ($request->email != $user->email) {
+      //   Arr::set($validate, 'email', 'required|string|email|max:255|unique:users');
+      // }
+
+      // Arr::add($validate, 'password', 'required|string|min:8');
+
+      // $request->validate($validate);
+      // $user->update($data);
+
+      // return redirect()->route('users.index')->with('success', 'User updated successfully');
+
+      return dd($validates);
+
     }
 
     /**

@@ -14,14 +14,14 @@
           <h4>Manage Users</h4>
         </div>
         <div class="card-body">
-          <table id="categoriesTable" class="table table-striped" style="width:100%">
+          <table id="usersTable" class="table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Name</th>
                 <th>Email Address</th>
                 <th>Posts</th>
-                <th>Level</th>
+                <th>Role</th>
                 <th>Member Since</th>
                 <th>Actions</th>
               </tr>
@@ -41,10 +41,10 @@
                   @endif
                   <td>{{ $user->created_at }}</td>
                   <td>
-                    <form action="{{route('categories.destroy', $user->id)}}" method="POST">
+                    <form action="{{route('users.destroy', $user->id)}}" method="POST">
                       @method('DELETE')
                       @csrf
-                      <a class="btn btn-sm btn-light me-2" href="{{ route('categories.edit', $user->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
+                      <a class="btn btn-sm btn-light me-2" href="{{ route('users.edit', $user->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
                       <button class="btn btn-sm btn-light" type="submit"><i class="bi bi-trash3 me-1"></i> Delete</button>
                     </form>
                   </td>
@@ -57,7 +57,7 @@
                 <th>Name</th>
                 <th>Email Address</th>
                 <th>Posts</th>
-                <th>Level</th>
+                <th>Role</th>
                 <th>Member Since</th>
                 <th>Actions</th>
               </tr>
@@ -69,7 +69,9 @@
   </div>
   <script>
     $(document).ready(function () {
-        $('#categoriesTable').DataTable();
+      $('#usersTable').DataTable({
+        "order": [ 0, 'desc' ]
+      });
     });
   </script>
 @endsection
