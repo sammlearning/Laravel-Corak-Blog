@@ -74,49 +74,77 @@
   .dashboard-content {
     height: calc(100vh - 60px);
     overflow: auto;
+    .dashboard-nav-top {
+      height: 70px;
+      padding: 1rem 0;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgb(200 200 200 / 30%);
+      display: flex;
+      align-items: center;
+      .container-fluid {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: space-between;
+        .dashboard-navtop-title {
+          margin: 0;
+          color: #555555;
+        }
+      }
+    }
+    .dashboard-card {
+      margin: 0.5rem;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgb(200 200 200 / 30%);
+      .card-header {
+        color: #555555;
+        padding: 1rem;
+        border-radius: 10px 10px 0px 0px;
+        background-color: #fbfbfb;
+        border-bottom: 1px solid #ecf0f1;
+        .card-header-title {
+          margin: 0;
+        }
+      }
+      .card-body {
+        padding: 1rem;
+      }
+      .choices__list--multiple .choices__item {
+        background-color: $primary-color;
+        border-color: $primary-color;
+      }
+      .category-badge {
+        background-color: $primary-color;
+        padding: 0.3rem 0.5rem;
+      }
+      .category-badge:hover {
+        background: $primary-color-alt;
+      }
+      .btn-primary {
+        background: $primary-color;
+        border-color: $primary-color;
+        box-shadow: none;
+      }
+      .btn-primary:hover {
+        background: $primary-color-alt;
+        border-color: $primary-color-alt;
+      }
+      a.profile-link {
+        color: $primary-color;
+        text-decoration: none;
+      }
+      a.profile-link:hover {
+        color: $primary-color-alt;
+      }
+    }
     main {
       position: unset;
       min-height: unset;
       .dashboard-col {
         padding: 0;
       }
-      .dashboard-card {
-        margin: 0.5rem;
-        padding: 1rem;
-        background-color: #ffffff;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgb(200 200 200 / 30%);
-        .card-header, .card-body {
-          padding: 0.5rem;
-        }
-        .choices__list--multiple .choices__item {
-          background-color: $primary-color;
-          border-color: $primary-color;
-        }
-        .category-badge {
-          background-color: $primary-color;
-          padding: 0.3rem 0.5rem;
-        }
-        .category-badge:hover {
-          background: $primary-color-alt;
-        }
-        .btn-primary {
-          background: $primary-color;
-          border-color: $primary-color;
-          box-shadow: none;
-        }
-        .btn-primary:hover {
-          background: $primary-color-alt;
-          border-color: $primary-color-alt;
-        }
-        a.profile-link {
-          color: $primary-color;
-          text-decoration: none;
-        }
-        a.profile-link:hover {
-          color: $primary-color-alt;
-        }
-      }
+
     }
   }
 }

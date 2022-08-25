@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -80,35 +81,34 @@ class UserController extends Controller
 
       $user = User::findOrFail($id);
 
-      $validates = [
+      $validate = collect([
         'name' => 'required|string|max:255',
         'email' => 'required|string|email|max:255',
-        'role' => 'required|integer',
-      ];
+      ]);
 
-      $data = [
+      $data = collect([
         'name' => $request->name,
         'email' => $request->email,
-        'is_admin' => $request->role,
-      ];
+      ]);
 
-      // if (empty($request->password)) {
-        // Arr::add($validate, 'password', 'required|string|min:8');
-        Arr::add($data, 'password', Hash::make($request->password));
-      // }
+      if (!empty($request->password)) {
+        $validate->put('password', 'required|string|min:8');
+        $data->put('password', Hash::make($request->password));
+      }
 
-      // if ($request->email != $user->email) {
-      //   Arr::set($validate, 'email', 'required|string|email|max:255|unique:users');
-      // }
+      if ($request->email != $user->email) {
+        $validate->put('email', 'required|string|email|max:255|unique:users');
+      }
 
-      // Arr::add($validate, 'password', 'required|string|min:8');
+      if ($id != Auth::user()->id) {
+       $validate->put('role', 'required|integer');
+       $data->put('is_admin', $request->role);
+      }
 
-      // $request->validate($validate);
-      // $user->update($data);
+      $request->validate($validate->all());
+      $user->update($data->all());
 
-      // return redirect()->route('users.index')->with('success', 'User updated successfully');
-
-      return dd($validates);
+      return redirect()->route('users.index')->with('success', 'User updated successfully');
 
     }
 
@@ -120,6 +120,10 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+      $user = User::findOrFail($id);
+      if ($id != Auth::user()->id) {
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User deleted successfully');
+      }
     }
 }

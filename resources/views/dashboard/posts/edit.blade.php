@@ -11,7 +11,7 @@
             </div>
           @endif
           <div class="card-header">
-            <h4>Edit post</h4>
+            <h5 class="card-header-title">Edit post</h5>
           </div>
           <div class="card-body">
             <form action="{{route('posts.update', $post->id)}}" method="POST">

@@ -17,7 +17,7 @@
             </div>
           @endif
           <div class="card-header">
-            <h4>Create a new category</h4>
+            <h5 class="card-header-title">Create a new category</h5>
           </div>
           <div class="card-body">
             <form action="{{route('categories.store')}}" method="POST">

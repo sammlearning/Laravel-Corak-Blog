@@ -5,7 +5,7 @@
       <div class="col-md-12 dashboard-col">
         <div class="dashboard-card">
           <div class="card-header">
-            <h4>Dashboard</h4>
+            <h5 class="card-header-title">Dashboard</h5>
           </div>
           <div class="card-body">
             {{Route::currentRouteName()}}
@@ -17,7 +17,7 @@
       <div class="col-md-4 dashboard-col">
         <div class="dashboard-card">
           <div class="card-header">
-            <h4>Dashboard</h4>
+            <h5 class="card-header-title">Dashboard</h5>
           </div>
           <div class="card-body">
             <canvas id="myChart" width="400" height="400"></canvas>
@@ -64,7 +64,7 @@
       <div class="col-md-4 dashboard-col">
         <div class="dashboard-card">
           <div class="card-header">
-            <h4>Posts</h4>
+            <h5 class="card-header-title">Posts</h5>
           </div>
           <div class="card-body">
             <canvas id="myChart1"></canvas>
@@ -120,7 +120,7 @@
       <div class="col-md-4 dashboard-col">
         <div class="dashboard-card">
           <div class="card-header">
-            <h4>Users</h4>
+            <h5 class="card-header-title">Users</h5>
           </div>
           <div class="card-body">
             <canvas id="myChart12"></canvas>
@@ -156,7 +156,7 @@
       <div class="col-md-12 dashboard-col">
         <div class="dashboard-card">
           <div class="card-header">
-            <h4>Dashboard</h4>
+            <h5 class="card-header-title">Dashboard</h5>
           </div>
           <div class="card-body">
             <ul class="list-group">

@@ -11,7 +11,7 @@
           </div>
         @endif
         <div class="card-header">
-          <h4>Manage Users</h4>
+          <h5 class="card-header-title">Manage Users</h5>
         </div>
         <div class="card-body">
           <table id="usersTable" class="table table-striped" style="width:100%">
