@@ -47,7 +47,7 @@
             <ul class="dashboard-list">
               <h6 class="dashboard-list-title">Users</h6>
               <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-person-plus-fill"></i></span> Manage Users</a>
+                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-people-fill"></i></span> Manage Users</a>
               </li>
               <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
                 <a class="nav-link" href="#"><span class="dashboard-list-icon"><i class="bi bi-people-fill"></i></span> Link</a>

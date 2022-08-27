@@ -1,5 +1,6 @@
 .post-page {
   @include card;
+  border: 1px solid #EEEEEE;
   .post-title {
     font-weight: bold;
   }
@@ -49,6 +50,7 @@
   }
   .comments {
     @include card;
+    border: 1px solid #EEEEEE;
     padding-bottom: 1rem;
     .comment {
       display: flex;

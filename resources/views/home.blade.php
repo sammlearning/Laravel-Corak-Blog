@@ -26,7 +26,7 @@
                 {{ $category->title }} ,
               @endforeach
             </span>
-            <a class="btn post-read-more" href="{{route('post')}}">Read more <i class="bi bi-chevron-right"></i></a>
+            <a class="btn post-read-more" href="{{route('posts.show', $post->id)}}">Read more <i class="bi bi-chevron-right"></i></a>
           </div>
         </div>
       @endforeach

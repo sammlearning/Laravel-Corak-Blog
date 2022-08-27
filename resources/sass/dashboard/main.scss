@@ -3,6 +3,9 @@
   > .row {
     height: 100vh;
   }
+  .dashboard-col {
+    padding: 0.7rem;
+  }
   .dashboard-sidebar {
     background-color: $secondary-color;
     padding: 0;
@@ -78,7 +81,7 @@
       height: 70px;
       padding: 1rem 0;
       background-color: #ffffff;
-      box-shadow: 0 0 10px rgb(200 200 200 / 30%);
+      box-shadow: 0 0 10px rgb(200 200 200 / 40%);
       display: flex;
       align-items: center;
       .container-fluid {
@@ -93,10 +96,9 @@
       }
     }
     .dashboard-card {
-      margin: 0.5rem;
       background-color: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgb(200 200 200 / 30%);
+      box-shadow: 0 0 10px rgb(200 200 200 / 40%);
       .card-header {
         color: #555555;
         padding: 1rem;
@@ -137,14 +139,6 @@
       a.profile-link:hover {
         color: $primary-color-alt;
       }
-    }
-    main {
-      position: unset;
-      min-height: unset;
-      .dashboard-col {
-        padding: 0;
-      }
-
     }
   }
 }

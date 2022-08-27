@@ -55,6 +55,7 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Publish</button>
+              <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
             </form>
           </div>
         </div>

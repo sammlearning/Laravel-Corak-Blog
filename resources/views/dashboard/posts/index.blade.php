@@ -21,7 +21,7 @@
                 <th>User</th>
                 <th>Post Subject</th>
                 {{-- <th>Body</th> --}}
-                <th>Category</th>
+                <th>Categories</th>
                 <th>Created at</th>
                 <th>Actions</th>
               </tr>
@@ -56,7 +56,7 @@
                 <th>User</th>
                 <th>Post Subject</th>
                 {{-- <th>Body</th> --}}
-                <th>Category</th>
+                <th>Categories</th>
                 <th>Created at</th>
                 <th>Actions</th>
               </tr>

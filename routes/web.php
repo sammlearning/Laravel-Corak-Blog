@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +24,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/posts', function () {
-  return view('post');
-})->name('post');
+Route::get('posts/{id}', [PostController::class, 'show']);
+Route::resource('posts.comments', CommentController::class)->scoped([
+  'comments' => 'slug',
+]);
 
 Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('dashboard', function () {

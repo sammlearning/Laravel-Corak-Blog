@@ -36,3 +36,24 @@
     }
   }
 }
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+  .auth-row {
+    background: #fff;
+    .card {
+      align-items: center;
+      border-radius: unset;
+      box-shadow: none;
+      .card-header {
+        color: unset;
+        border-radius: unset;
+        background-color: #ffffff;
+        padding: 1.5rem;
+      }
+      img {
+        width: 230px;
+      }
+    }
+  }
+}

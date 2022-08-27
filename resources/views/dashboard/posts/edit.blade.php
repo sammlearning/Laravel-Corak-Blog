@@ -50,6 +50,7 @@
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Update</button>
+              <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
             </form>
           </div>
         </div>

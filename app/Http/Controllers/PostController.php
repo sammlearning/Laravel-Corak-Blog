@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +76,12 @@ class PostController extends Controller
      */
     public function show($id)
     {
-      return redirect()->route('posts.index');
+
+      $post = Post::findOrFail($id);
+      $comments = Comment::where('post_id', $post->id)->orderBy('id', 'DESC')->get();
+
+      return view('post', compact('post', 'comments'));
+
     }
 
     /**
