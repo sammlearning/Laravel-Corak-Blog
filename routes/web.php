@@ -24,10 +24,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('posts/{id}', [PostController::class, 'show']);
-Route::resource('posts.comments', CommentController::class)->scoped([
-  'comments' => 'slug',
-]);
 
 Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('dashboard', function () {
@@ -39,3 +35,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     'dashboard/users' => UserController::class,
   ]);
 });
+
+Route::get('posts/{id}', [PostController::class, 'show'])->name('posts.show')->withoutMiddleware(['auth', 'admin']);
+Route::resource('posts.comments', CommentController::class);
