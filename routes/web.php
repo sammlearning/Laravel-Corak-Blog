@@ -37,4 +37,4 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::get('posts/{id}', [PostController::class, 'show'])->name('posts.show')->withoutMiddleware(['auth', 'admin']);
-Route::resource('posts.comments', CommentController::class);
+Route::resource('posts.comments', CommentController::class)->shallow();

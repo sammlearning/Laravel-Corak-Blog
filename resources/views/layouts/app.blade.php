@@ -210,5 +210,12 @@
       </div>
     </div>
   </footer>
+  @if (isset($scroll) || session('scroll'))
+    <script>
+      $([document.documentElement, document.body]).animate({
+          scrollTop: $("{{ $scroll ?? session('scroll') }}").offset().top-100
+      });
+    </script>
+  @endif
 </body>
 </html>
