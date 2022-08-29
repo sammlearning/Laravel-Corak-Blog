@@ -59,8 +59,8 @@
                     <img src="{{asset('images/man1.png')}}" alt="">
                   </div>
                   <div class="form-floating col-5 col-md-6 col-xl-7">
-                    <input type="text" class="form-control" id="comment" name="comment" placeholder="Your comment" value="{{ $edit_comment->comment }}" required>
-                    <label for="comment">Your comment</label>
+                    <input type="text" class="form-control" id="comment" name="comment" placeholder="Edit your comment" value="{{ $edit_comment->comment }}" required>
+                    <label for="comment">Edit your comment</label>
                   </div>
                   <div class="col-auto">
                     <button type="submit" class="btn btn-light add_comment_btn">Update</button>

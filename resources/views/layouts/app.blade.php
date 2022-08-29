@@ -70,9 +70,12 @@
               @if (Auth::user()->is_admin)
                 <li>
                   <a class="dropdown-item" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
-                  <hr class="dropdown-divider">
                 </li>
               @endif
+              <li>
+                <a href="{{ route('profile.index') }}" class="dropdown-item">Profile</a>
+              </li>
+              <hr class="dropdown-divider">
               <li>
                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
