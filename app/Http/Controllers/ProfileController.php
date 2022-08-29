@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
@@ -13,7 +17,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        //
+      return view('profile.index');
     }
 
     /**
@@ -68,7 +72,48 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+      if (Auth::user()->id != $id) {
+        return redirect()->route('profile.index');
+      }
+
+      $validate = collect([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255',
+      ]);
+
+      $data = collect([
+        'name' => $request->name,
+        'email' => $request->email,
+      ]);
+
+      if (!empty($request->password)) {
+        $validate->put('password', 'required|string|min:8|confirmed');
+        $data->put('password', $request->password);
+        $data->put('password_confirmation', $request->password_confirmation);
+      }
+
+      if ($request->email != Auth::user()->email) {
+        $validate->put('email', 'required|string|email|max:255|unique:users');
+      }
+
+      $validator = Validator::make($data->all(), $validate->all());
+
+      if ($validator->fails()) {
+        return redirect()->route('profile.index')->with('scroll', '#edit-profile')->withErrors($validator)->withInput();
+      }
+
+      if (!empty($request->password)) {
+        $data->put('password', Hash::make($request->password));
+        $data->forget('password_confirmation');
+      }
+
+      $user = User::find($id);
+
+      $user->update($data->all());
+
+      return redirect()->route('profile.index')->with(['success' => 'Profile updated successfully', 'scroll' => '#edit-profile']);
+
     }
 
     /**
