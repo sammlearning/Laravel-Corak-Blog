@@ -1,5 +1,5 @@
 $('.navtop-toggler').click( function () {
-  $('.static-navtop-list').toggle();
+  // $('.static-navtop-list').toggle();
   $('.navtop-container').toggleClass('active');
 } );
 $('.navbar-center-toggler').click( function () {

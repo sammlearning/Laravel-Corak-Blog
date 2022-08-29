@@ -46,38 +46,6 @@
             <a class="nav-link" href="#">Contact us</a>
           </li>
         </ul>
-        <ul class="navbar-nav navtop-list">
-          <!-- Authentication Links -->
-          @guest
-            @if (Route::has('login'))
-              <li class="nav-item">
-                  <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-              </li>
-            @endif
-
-            @if (Route::has('register'))
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-              </li>
-            @endif
-          @else
-            <div class="nav-item dropdown">
-              <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" v-pre="">
-                {{ Auth::user()->name }}
-              </a>
-              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 25px, 0px);">
-                @if (Auth::user()->is_admin)
-                  <a class="dropdown-item" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
-                  <hr class="dropdown-divider">
-                @endif
-                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                  @csrf
-                </form>
-              </div>
-            </div>
-          @endguest
-        </ul>
       </div>
       <ul class="navbar-nav static-navtop-list">
         <!-- Authentication Links -->
@@ -94,21 +62,25 @@
             </li>
           @endif
         @else
-          <div class="nav-item dropdown">
-            <a id="navtop-profile-dropdown" class="nav-link dropdown-toggle navtop-profile-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" v-pre="">
+          <li class="nav-item dropdown">
+            <a id="navtop-profile-dropdown" class="nav-link dropdown-toggle navtop-profile-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               <img src="{{ asset('images/profile.jpg') }}" class="rounded-circle" alt="..."> {{ Auth::user()->name }}
             </a>
-            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navtop-profile-dropdown" data-popper-placement="bottom-end" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(0px, 25px, 0px);">
+            <ul class="dropdown-menu">
               @if (Auth::user()->is_admin)
-                <a class="dropdown-item" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
-                <hr class="dropdown-divider">
+                <li>
+                  <a class="dropdown-item" href="{{ route('dashboard') }}">{{ __('Dashboard') }}</a>
+                  <hr class="dropdown-divider">
+                </li>
               @endif
-              <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
-              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                @csrf
-              </form>
-            </div>
-          </div>
+              <li>
+                <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                  @csrf
+                </form>
+              </li>
+            </ul>
+          </li>
         @endguest
       </ul>
     </div>
@@ -158,6 +130,16 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Play lists</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <form action="">
+              <div class="nav-search">
+                <i class="bi bi-search"></i>
+                <input type="search" name="" id="" placeholder="Search">
+              </div>
+            </form>
           </li>
         </ul>
       </div>

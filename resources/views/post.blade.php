@@ -42,11 +42,11 @@
             <div class="alert alert-warning  mx-3 mt-4" role="alert">
               You must be logged in to comment
               @if (Route::has('login'))
-                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('login') }}" class="text-decoration-none">Login</a>
               @endif
               @if (Route::has('register'))
                 <span> or </span>
-                <a href="{{ route('register') }}">Register a new account</a>.
+                <a href="{{ route('register') }}" class="text-decoration-none">Register a new account</a>.
               @endif
             </div>
           @else

@@ -72,6 +72,32 @@ main{
       background-color: $primary-color-alt;
     }
   }
+  .nav-search {
+    height: 35px;
+    display: flex;
+    i {
+      background: $primary-color;
+      color: #ffffff;
+      padding: 0px 10px;
+      border-bottom: 1px solid #ffffff;
+    }
+    i:hover {
+      cursor: pointer;
+      color: #bdc3c7;
+    }
+    input {
+      background: $primary-color;
+      color: #ffffff;
+      padding: 5px;
+      border: 0;
+      border-bottom: 1px solid #ffffff;
+      outline: none;
+      height: 35px;
+    }
+    input::placeholder {
+      color: #ffffff;
+    }
+  }
 }
 
 .featured-post {
@@ -184,7 +210,7 @@ main{
     .page-link {
       border-color: $primary-color;
       background-color: $primary-color;
-      color: #fff;
+      color: #ffffff;
     }
   }
   a.page-link {
@@ -291,8 +317,10 @@ footer {
   .navbar-center.active {
     height: 100vh;
     overflow: auto;
+    position: fixed;
+    width: 100%;
     .container {
-      padding-top: 1rem;
+      padding: 1rem 0;
       flex-direction: column;
       .navbar-nav {
         flex-direction: column;
