@@ -123,6 +123,7 @@ class UserController extends Controller
       $user = User::findOrFail($id);
       if ($id != Auth::user()->id) {
         $user->delete();
+        $user->image()->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully');
       }
     }

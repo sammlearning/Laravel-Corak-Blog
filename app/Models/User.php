@@ -44,6 +44,10 @@ class User extends Authenticatable
         'is_admin' => 'boolean',
     ];
 
+    public function image() {
+      return $this->morphOne(Image::class, 'imageable');
+    }
+
     public function posts() {
       return $this->hasMany(Post::class);
     }

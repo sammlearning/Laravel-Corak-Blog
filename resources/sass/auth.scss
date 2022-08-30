@@ -3,36 +3,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.card {
-  @include card;
-  border: 0;
-  img {
-    width: 300px;
-    display: block;
-    margin: auto;
-  }
-  .card-header {
-    @include card_title;
-    margin-bottom: 0;
-    h5 {
-      margin: 0;
+  .card {
+    @include card;
+    border: 0;
+    img {
+      width: 300px;
+      display: block;
+      margin: auto;
     }
-  }
-  .card-body {
-    padding-top: 0;
-    a {
-      color: $primary-color;
-      text-decoration: none;
+    .card-header {
+      @include card_title;
+      margin-bottom: 0;
+      h5 {
+        margin: 0;
+      }
     }
-    a:hover {
-      color: $primary-color-alt;
-    }
-    .auth-submit-btn {
-      @include primary_btn;
-    }
-    .auth-submit-btn:hover {
-      @include primary_btn_hover;
+    .card-body {
+      padding-top: 0;
+      a {
+        color: $primary-color;
+        text-decoration: none;
+      }
+      a:hover {
+        color: $primary-color-alt;
+      }
+      .auth-submit-btn {
+        @include primary_btn;
+      }
+      .auth-submit-btn:hover {
+        @include primary_btn_hover;
+      }
     }
   }
 }

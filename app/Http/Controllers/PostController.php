@@ -141,6 +141,7 @@ class PostController extends Controller
 
       $post = Post::findOrFail($id);
       $post->delete();
+      $post->image()->delete();
       return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
 
     }

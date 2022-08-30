@@ -56,9 +56,9 @@
                   @csrf
                   @method('PUT')
                   <div class="col-auto">
-                    <img src="{{asset('images/man1.png')}}" alt="">
+                    <img src="{{ asset(Auth::user()->image->url) }}" alt="">
                   </div>
-                  <div class="form-floating col-5 col-md-6 col-xl-7">
+                  <div class="form-floating col-6 col-md-7 col-xl-8">
                     <input type="text" class="form-control" id="comment" name="comment" placeholder="Edit your comment" value="{{ $edit_comment->comment }}" required>
                     <label for="comment">Edit your comment</label>
                   </div>
@@ -73,7 +73,7 @@
                   @csrf
                   <input type="hidden" name="post_id" value="{{ $post->id }}">
                   <div class="col-auto">
-                    <img src="{{asset('images/man1.png')}}" alt="">
+                    <img src="{{ asset(Auth::user()->image->url) }}" alt="">
                   </div>
                   <div class="form-floating col-7 col-md-8 col-xl-9">
                     <input type="text" class="form-control" id="comment" name="comment" placeholder="Add comment" required>
@@ -89,7 +89,7 @@
           @foreach ($comments as $comment)
             <div class="row g-3 comment">
               <div class="col-auto">
-                <img src="{{asset('images/profile.jpg')}}" class="rounded-circle" alt="">
+                <img src="{{ asset($comment->user->image->url) }}" class="rounded-circle" alt="">
               </div>
               <div class="col-8 comment-info">
                 <span><b>{{ $comment->user->name }}</b></span>

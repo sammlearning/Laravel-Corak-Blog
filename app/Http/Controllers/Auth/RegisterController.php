@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -72,12 +73,18 @@ class RegisterController extends Controller
         $is_admin = 1;
       }
 
-      return User::create([
+      $user = User::create([
         'name' => $data['name'],
         'email' => $data['email'],
         'is_admin' => $is_admin,
         'password' => Hash::make($data['password']),
       ]);
+
+      $image = new Image;
+      $image->url = 'images/profile.png';
+      $user->image()->save($image);
+
+      return $user;
 
     }
 }
