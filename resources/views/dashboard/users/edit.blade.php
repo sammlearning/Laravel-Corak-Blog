@@ -3,15 +3,30 @@
 @section('content')
     <div class="row">
       <div class="col-md-12 dashboard-col">
-        <div class="dashboard-card">
-          @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-              {{ session('success') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          @endif
+        @if (session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        @endif
+        <div class="dashboard-card profile-page h-auto mb-4">
           <div class="card-header">
-            <h5 class="card-header-title">Edit user : {{ $user->name }}</h5>
+            <h5 class="profile-page-title">User info</h5>
+          </div>
+          <div class="card-body profile-card-body">
+            <img class="rounded-circle profile-img" src="{{ asset($user->image->url) }}" alt="">
+            <ul>
+              <li><h5 class="user-name">{{ $user->name }}</h5></li>
+              <li>Role <div class="badge bg-primary">{{ $user->is_admin == 1 ? 'Admin' : 'User' }}</div></li>
+              <li>Published Posts <div class="badge bg-primary">{{ $user->posts->Count() }}</div></li>
+              <li>Published Comments <div class="badge bg-primary">{{ $user->posts->Count() }}</div></li>
+              <li>Member Since {{ $user->created_at }}</li>
+            </ul>
+          </div>
+        </div>
+        <div class="dashboard-card">
+          <div class="card-header">
+            <h5 class="card-header-title">Edit user</h5>
           </div>
           <div class="card-body">
             <form action="{{route('users.update', $user->id)}}" method="POST">

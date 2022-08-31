@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -21,7 +23,7 @@ class PostController extends Controller
       $posts = Post::with(['categories'])->get();
 
       if ($posts->isEmpty()) {
-        return redirect()->route('posts.create')->with('No posts', 'You have not created any post yet!');
+        return redirect()->route('posts.create')->with('No posts', 'There are no published posted. You can post a new post from this page.');
       }
 
       return view('dashboard.posts.index', ['posts' => $posts]);
@@ -52,6 +54,7 @@ class PostController extends Controller
         'subject' => 'required',
         'category' => 'required',
         'body' => 'required',
+        'image' => 'required',
       ]);
 
       $categories = $request->category;
@@ -63,6 +66,30 @@ class PostController extends Controller
       ]);
 
       $post->categories()->attach($categories);
+
+      // Upload post image
+
+      $image_64 = $request->image; //your base64 encoded data
+
+      // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+
+      $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+
+      // find substring fro replace here eg: data:image/png;base64,
+
+      $uploaded_image = str_replace($replace, '', $image_64);
+
+      $uploaded_image = str_replace(' ', '+', $uploaded_image);
+
+      $imageName = 'posts/'.Str()->random(10).'.png';
+
+      Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
+
+      $image = new Image;
+
+      $image->url = 'storage/'.$imageName;
+
+      $post->image()->save($image);
 
       return redirect()->route('posts.index')->with('success', 'Post published successfully');
 

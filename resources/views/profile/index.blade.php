@@ -4,7 +4,7 @@
 
   <div class="row">
     <div class="col-md-4 mb-4">
-      <nav id="navbar-example3" class="h-100 flex-column align-items-stretch pe-4 border-end">
+      <nav id="profile-navbar" class="h-100 flex-column align-items-stretch pe-4 border-end">
         <nav class="nav nav-pills flex-column">
           <a class="nav-link" href="#myprofile">My Profile</a>
           <a class="nav-link" href="#edit-profile">Edit Profile</a>
@@ -19,7 +19,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       @endif
-      <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+      <div data-bs-spy="scroll" data-bs-target="#profile-navbar" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
         <div id="myprofile">
           <div class="card profile-page">
             <div class="card-header">
@@ -105,7 +105,7 @@
               <h5 class="profile-page-title">Upload Profile Picture</h5>
             </div>
             <div class="card-body">
-              <form action="{{ route('image.store') }}" method="POST" id="upload_image_form">
+              <form action="{{ route('profile.image') }}" method="POST" id="upload_image_form">
                 @csrf
                 <div class="inf__drop-area w-100">
                   <span class="inf__btn">Choose files</span>

@@ -16,7 +16,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+      return abort(404);
     }
 
     /**
@@ -26,7 +26,7 @@ class CommentController extends Controller
      */
     public function create()
     {
-
+      return abort(404);
     }
 
     /**
@@ -60,7 +60,7 @@ class CommentController extends Controller
      */
     public function show(Comment $comment)
     {
-        //
+      return abort(404);
     }
 
     /**

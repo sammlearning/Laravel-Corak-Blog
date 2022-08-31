@@ -7,6 +7,12 @@ main{
   min-height: 100vh;
 }
 
+.navtop-profile-image {
+  max-width: 20px;
+  max-height: 100%;
+  margin-right: 0.5rem;
+}
+
 .navtop {
   padding: 0;
   line-height: 1.5rem;
@@ -21,11 +27,6 @@ main{
     .navtop-profile-dropdown {
       display: flex;
       align-items: center;
-      img {
-        max-width: 20px;
-        max-height: 100%;
-        margin-right: 0.5rem;
-      }
     }
   }
   .navtop-toggler {

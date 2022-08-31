@@ -30,7 +30,7 @@
               @foreach ($users as $user)
                 <tr>
                   <td>{{ $user->id }}</td>
-                  <td>{{ $user->name }}</td>
+                  <td><img src="{{ asset($user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $user->name }}</td>
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->posts_count }}</td>
                   <td>

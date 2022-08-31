@@ -39,6 +39,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
+  Route::post('profile/image', [ImageController::class, 'user'])->name('profile.image');
+  Route::post('post/image', [ImageController::class, 'post'])->name('post.image');
   Route::resource('posts.comments', CommentController::class)->shallow();
   Route::resources([
     'profile' => ProfileController::class,
@@ -46,5 +48,3 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('posts/{id}', [PostController::class, 'show'])->name('posts.show')->withoutMiddleware(['auth', 'admin']);
-
-Route::resource('image', ImageController::class);

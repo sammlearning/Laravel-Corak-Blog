@@ -18,7 +18,7 @@ class CategoryController extends Controller
       $categories = Category::withCount('posts')->get();
 
       if ($categories->isEmpty()) {
-        return redirect()->route('categories.create')->with('No categories', 'You have not created any category yet!');
+        return redirect()->route('categories.create')->with('No categories', 'There are no published categories. You can create a new category from this page.');
       }
 
       return view('dashboard.categories.index', ['categories' => $categories]);

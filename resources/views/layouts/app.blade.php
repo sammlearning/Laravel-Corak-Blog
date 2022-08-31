@@ -68,7 +68,7 @@
         @else
           <li class="nav-item dropdown">
             <a id="navtop-profile-dropdown" class="nav-link dropdown-toggle navtop-profile-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{ asset(Auth::user()->image->url) }}" class="rounded-circle" alt="..."> {{ Auth::user()->name }}
+              <img src="{{ asset(Auth::user()->image->url) }}" class="rounded-circle navtop-profile-image" alt="Profile image"> {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu">
               @if (Auth::user()->is_admin)

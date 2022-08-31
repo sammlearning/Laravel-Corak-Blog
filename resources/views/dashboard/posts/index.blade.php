@@ -3,13 +3,13 @@
 @section('content')
   <div class="row">
     <div class="col-md-12 dashboard-col">
+      @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ session('success') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
       <div class="dashboard-card">
-        @if (session('success'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        @endif
         <div class="card-header">
           <h5 class="card-header-title">Manage Posts</h5>
         </div>
@@ -18,10 +18,11 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>User</th>
-                <th>Post Subject</th>
+                <th>Post author</th>
+                <th>Post subject</th>
                 {{-- <th>Body</th> --}}
                 <th>Categories</th>
+                <th>Comments</th>
                 <th>Created at</th>
                 <th>Actions</th>
               </tr>
@@ -30,13 +31,16 @@
               @foreach ($posts as $post)
                 <tr>
                   <td>{{ $post->id }}</td>
-                  <td><a class="profile-link" href="#">{{ $post->user->name }}</a></td>
-                  <td>{{ $post->subject }}</td>
+                  <td><a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $post->user->name }}</a></td>
+                  <td><a class="profile-link" href="{{ route('posts.show', $post->id) }}">{{ $post->subject }}</a></td>
                   {{-- <td>{{ $post->body }}</td> --}}
                   <td>
                     @foreach ($post->categories as $category)
                       <a href="#"><span class="badge rounded-pill category-badge">{{$category->title}}</span></a>
                     @endforeach
+                  </td>
+                  <td>
+                    <span class="badge rounded-pill category-badge">{{ $post->comments->Count() }}</span>
                   </td>
                   <td>{{ $post->created_at }}</td>
                   <td>
@@ -53,10 +57,11 @@
             <tfoot>
               <tr>
                 <th>#</th>
-                <th>User</th>
-                <th>Post Subject</th>
+                <th>Post author</th>
+                <th>Post subject</th>
                 {{-- <th>Body</th> --}}
                 <th>Categories</th>
+                <th>Comments</th>
                 <th>Created at</th>
                 <th>Actions</th>
               </tr>

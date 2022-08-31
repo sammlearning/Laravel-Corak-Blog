@@ -3,13 +3,13 @@
 @section('content')
   <div class="row">
     <div class="col-md-12 dashboard-col">
+      @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          {{ session('success') }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
       <div class="dashboard-card">
-        @if (session('success'))
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-          </div>
-        @endif
         <div class="card-header">
           <h5 class="card-header-title">Manage Categories</h5>
         </div>

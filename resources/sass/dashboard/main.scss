@@ -93,6 +93,10 @@
           margin: 0;
           color: #555555;
         }
+        .dashboard-navtop-link {
+          display: flex;
+          align-items: center;
+        }
       }
     }
     .dashboard-card {
@@ -138,6 +142,14 @@
       }
       a.profile-link:hover {
         color: $primary-color-alt;
+      }
+      .user-profile-image {
+        max-width: 25px;
+        max-height: 100%;
+        margin-right: 0.5rem;
+      }
+      .post-image {
+        max-height: 300px;
       }
     }
   }
