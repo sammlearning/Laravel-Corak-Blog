@@ -59,7 +59,7 @@
           <a class="post post-small" href="#">
             <img class="post-img" src="{{asset('images/post'.$x.'.jpg')}}" alt="">
             <div class="post-info">
-              <b class="post-title">List of the best blog website templates</b>
+              <b class="post-title">Nulla malesuada tincidunt lacus, eu mattis augue pretium iaculis.</b>
               <span>Published at 12/8/2022</span>
             </div>
           </a>
@@ -73,7 +73,7 @@
           <a class="post post-small" href="#">
             <img class="post-img" src="{{asset('images/post'.$x.'.jpg')}}" alt="">
             <div class="post-info">
-              <b class="post-title">List of the best blog website templates</b>
+              <b class="post-title">Nulla malesuada tincidunt lacus, eu mattis augue pretium iaculis.</b>
               <span>Published at 12/8/2022</span>
             </div>
           </a>

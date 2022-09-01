@@ -26,7 +26,7 @@
             <h5 class="card-header-title">Create a new post</h5>
           </div>
           <div class="card-body">
-            <form action="{{route('posts.store')}}" method="POST" id="publish-post-form">
+            <form action="{{route('posts.store')}}" method="POST" id="upload_image_form">
               @csrf
               <div class="mb-3">
                 <label for="postSubject" class="form-label">Post subject</label>
@@ -65,10 +65,22 @@
                   <input type="file" name="upload_image" id="upload_image" required>
                 </div>
                 <div class="d-none" id="uploaded-image">
-                  <div class="mt-4" id="profile-image"></div>
+                  <div class="mt-4">
+                    <img src="" id="post-thumbnail" style="max-width: 100%">
+                  </div>
+                  <div class="uploaded-image-actions d-block mx-auto mt-2" style="width: fit-content">
+                    <div class="btn-group" role="group" aria-label="Image Options">
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleX"><i class="bi bi-arrow-left-right"></i></button>
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleY"><i class="bi bi-arrow-down-up"></i></button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Image Options">
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateRight"><i class="bi bi-arrow-clockwise"></i></button>
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateLeft"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <button type="button" class="btn btn-primary" id="publish-post">Publish</button>
+              <button type="button" class="btn btn-primary" id="crop-image">Publish</button>
               <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
             </form>
           </div>
@@ -76,56 +88,16 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
   <script>
-
-    var multipleCancelButton = new Choices('#postCategory', {
-      removeItemButton: true,
-      // maxItemCount:5,
-      // searchResultLimit:5,
-      // renderChoiceLimit:5
-    });
-
-    $image_crop = $("#profile-image").croppie({
-      enableExif: true,
-      viewport: {
-        width: 800,
-        height: 500,
-        type: 'sqare'
-      },
-      boundary: {
-        width: 1000,
-        height: 700
-      }
-    });
-
-    var post_image = false, input = '';
-
-    $("#upload_image").on("change", function(){
-
-      var reader = new FileReader();
-      reader.onload = function (event) {
-        $image_crop.croppie("bind", {url: event.target.result});
-      }
-
-      post_image = true;
-      reader.readAsDataURL(this.files[0]);
-      $("#uploaded-image").toggleClass('d-none');
-
-    });
-
-    $("#publish-post").click(function(event){
-
-      $image_crop.croppie("result", {
-        type: "canvas",
-        size: "viewport"
-      }).then(function(response){
-        if (post_image === true) {
-          input = $("<input>").attr("type", "hidden").attr("name", "image").val(response);
-        }
-        $('#publish-post-form').append(input).submit();
+        var multipleCancelButton = new Choices('#postCategory', {
+        removeItemButton: true,
+        // maxItemCount:5,
+        // searchResultLimit:5,
+        // renderChoiceLimit:5
       });
-
-    });
-
   </script>
+  <script src="{{ asset('assets/post-thumbnail.js') }}"></script>
 @endsection

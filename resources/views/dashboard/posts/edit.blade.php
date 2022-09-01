@@ -114,6 +114,9 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
   <script>
     var multipleCancelButton = new Choices('#postCategory', {
       removeItemButton: true,
@@ -122,8 +125,5 @@
       // renderChoiceLimit:5
     });
   </script>
-@endsection
-
-@section('scripts')
   <script src="{{ asset('assets/post-thumbnail.js') }}"></script>
 @endsection

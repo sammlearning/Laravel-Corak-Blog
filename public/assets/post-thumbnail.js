@@ -41,20 +41,23 @@ $('#upload_image').on('change', function(){
 
   $('#loader').addClass('d-none');
 
-  $("#crop-image").click(function(event){
-    var cropper = $image.data('cropper'), reader = new FileReader();
-    cropper.getCroppedCanvas({ width: 800, height: 500, fillColor: '#ffffff' }).toBlob((blob) => {
-      reader.readAsDataURL(blob);
-      reader.onloadend = function() {
-        $('#loader').removeClass('d-none').addClass('m-4');
-        $('.center-loader-message').html('Uploading your image');
-        $('#uploaded-image, .inf__drop-area').addClass('d-none');
-        var input = $("<input>").attr("type", "hidden").attr("name", "image").val(reader.result);
-        $('#upload_image_form').append(input).submit();
-      }
-    });
-  });
+});
 
+$("#crop-image").click(function(event){
+  var cropper = $image.data('cropper'), reader = new FileReader();
+  if (!cropper) {
+    return window.alert('Please choose an image file.');
+  }
+  cropper.getCroppedCanvas({ width: 800, height: 500, fillColor: '#ffffff' }).toBlob((blob) => {
+    reader.readAsDataURL(blob);
+    reader.onloadend = function() {
+      $('#loader').removeClass('d-none').addClass('m-4');
+      $('.center-loader-message').html('Uploading your image');
+      $('#uploaded-image, .inf__drop-area').addClass('d-none');
+      var input = $("<input>").attr("type", "hidden").attr("name", "image").val(reader.result);
+      $('#upload_image_form').append(input).submit();
+    }
+  });
 });
 
 $('.cropper-action').click(function () {
