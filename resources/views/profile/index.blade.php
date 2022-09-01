@@ -112,48 +112,120 @@
                   <span class="inf__hint">or drag and drop files here</span>
                   <input type="file" name="upload_image" id="upload_image" required>
                 </div>
+                <div class="center-loader text-primary d-none" id="loader">
+                  <h4 class="center-loader-message">Loading your image</h4>
+                  <div class="spinner-grow" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
                 <div class="d-none" id="uploaded-image">
-                  <div class="mt-4" id="profile-image"></div>
-                  <button type="button" class="btn btn-primary d-block mx-auto mt-2" id="crop-image">Update</button>
+                  <div class="mt-4">
+                    <img src="" id="profile-image" style="max-width: 100%">
+                  </div>
+                  <div class="uploaded-image-actions d-block mx-auto mt-2">
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleX"><i class="bi bi-arrow-left-right"></i></button>
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleY"><i class="bi bi-arrow-down-up"></i></button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateRight"><i class="bi bi-arrow-clockwise"></i></button>
+                      <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateLeft"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    </div>
+                    <button type="button" class="btn btn-primary" id="crop-image"><i class="bi bi-upload"></i> Upload image</button>
+                  </div>
                 </div>
               </form>
               <script>
-                $image_crop = $("#profile-image").croppie({
-                  enableExif: true,
-                  viewport: {
-                    width: 400,
-                    height: 400,
-                    type: 'circle'
-                  },
-                  boundary: {
-                    width: 500,
-                    height: 500
+
+                var $image = $('#profile-image');
+                var URL = window.URL || window.webkitURL;
+                var originalImageURL = $image.attr('src');
+                var uploadedImageName = 'cropped.jpg';
+                var uploadedImageType = 'image/jpeg';
+                var uploadedImageURL;
+
+                $('#upload_image').on('change', function(){
+                  $('#loader').removeClass('d-none');
+
+                  var files = this.files;
+                  var file;
+
+                  if (files && files.length) {
+                    file = files[0];
+
+                    if (/^image\/\w+$/.test(file.type)) {
+
+                      uploadedImageName = file.name;
+                      uploadedImageType = file.type;
+
+                      if (uploadedImageURL) {
+                        URL.revokeObjectURL(uploadedImageURL);
+                      }
+
+                      uploadedImageURL = URL.createObjectURL(file);
+                      $image.cropper('destroy').attr('src', uploadedImageURL).cropper({
+                        aspectRatio: 1 / 1,
+                        viewMode: 1,
+                        dragMode: 'move',
+                        crop: function(event) {}
+                      });
+
+                      $('#uploaded-image').removeClass('d-none');
+
+                    } else {
+                      window.alert('Please choose an image file.');
+                    }
+
                   }
-                });
 
-                $("#upload_image").on("change", function(){
+                  $('#loader').addClass('d-none');
 
-                  var reader = new FileReader();
-                  reader.onload = function (event) {
-                    $image_crop.croppie("bind", {url: event.target.result});
-                  }
-
-                  reader.readAsDataURL(this.files[0]);
-                  $("#uploaded-image").toggleClass('d-none');
-
-                });
-
-                $("#crop-image").click(function(event){
-
-                  $image_crop.croppie("result", {
-                    type: "canvas",
-                    size: "viewport"
-                  }).then(function(response){
-                    var input = $("<input>").attr("type", "hidden").attr("name", "image").val(response);
-                    $('#upload_image_form').append(input).submit();
+                  $("#crop-image").click(function(event){
+                    var cropper = $image.data('cropper'), reader = new FileReader();
+                    cropper.getCroppedCanvas({ width: 400, height: 400, fillColor: '#ffffff' }).toBlob((blob) => {
+                      reader.readAsDataURL(blob);
+                      reader.onloadend = function() {
+                        $('#loader').removeClass('d-none').addClass('m-4');
+                        $('.center-loader-message').html('Uploading your image');
+                        $('#uploaded-image, .inf__drop-area').addClass('d-none');
+                        var input = $("<input>").attr("type", "hidden").attr("name", "image").val(reader.result);
+                        $('#upload_image_form').append(input).submit();
+                      }
+                    });
                   });
 
                 });
+
+                $('.cropper-action').click(function () {
+                  const action = $(this).attr("data-cropper");
+                  switch (action) {
+                    case 'scaleX-':
+                      $image.cropper("scaleX", -1)
+                      $(this).attr("data-cropper", "scaleX");
+                      break;
+                    case 'scaleX':
+                      $image.cropper("scaleX", 1)
+                      $(this).attr("data-cropper", "scaleX-");
+                      break;
+                    case 'scaleY-':
+                      $image.cropper("scaleY", -1)
+                      $(this).attr("data-cropper", "scaleY");
+                      break;
+                    case 'scaleY':
+                      $image.cropper("scaleY", 1)
+                      $(this).attr("data-cropper", "scaleY-");
+                      break;
+                    case 'rotateRight':
+                      $image.cropper("rotate", 45)
+                      break;
+                    case 'rotateLeft':
+                      $image.cropper("rotate", -45)
+                      break;
+                    default:
+                      break;
+                  }
+                });
+
               </script>
             </div>
           </div>

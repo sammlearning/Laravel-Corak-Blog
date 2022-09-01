@@ -20,6 +20,12 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    {{-- jQuery plugin wrapper for Cropper.js --}}
+    <script src="{{ asset('build/assets/cropper.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/cropper.css') }}">
+    <script src="{{ asset('build/assets/jquery-cropper.js') }}"></script>
+
 </head>
 <body>
   <nav class="navbar navbar-dark navbar-expand-lg navtop">
