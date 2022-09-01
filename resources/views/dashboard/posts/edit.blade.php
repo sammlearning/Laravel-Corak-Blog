@@ -86,54 +86,29 @@
                 <span class="inf__hint">or drag and drop files here</span>
                 <input type="file" name="upload_image" id="upload_image" required>
               </div>
+              <div class="center-loader text-primary d-none" id="loader">
+                <h4 class="center-loader-message">Loading your image</h4>
+                <div class="spinner-grow" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
+              </div>
               <div class="d-none" id="uploaded-image">
-                <div class="mt-4" id="profile-image"></div>
-                <button type="button" class="btn btn-primary d-block mx-auto mt-2" id="crop-image">Update</button>
+                <div class="mt-4">
+                  <img src="" id="post-thumbnail" style="max-width: 100%">
+                </div>
+                <div class="uploaded-image-actions d-block mx-auto mt-2">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleX"><i class="bi bi-arrow-left-right"></i></button>
+                    <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleY"><i class="bi bi-arrow-down-up"></i></button>
+                  </div>
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateRight"><i class="bi bi-arrow-clockwise"></i></button>
+                    <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateLeft"><i class="bi bi-arrow-counterclockwise"></i></button>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="crop-image"><i class="bi bi-upload"></i> Upload image</button>
+                </div>
               </div>
             </form>
-            <script>
-              $image_crop = $("#profile-image").croppie({
-                enableExif: true,
-                viewport: {
-                  width: 800,
-                  height: 500,
-                  type: 'sqare'
-                },
-                boundary: {
-                  width: 1000,
-                  height: 700
-                }
-              });
-
-              var post_image = false, input = '';
-
-              $("#upload_image").on("change", function(){
-
-                var reader = new FileReader();
-                reader.onload = function (event) {
-                  $image_crop.croppie("bind", {url: event.target.result});
-                }
-
-                post_image = true;
-                reader.readAsDataURL(this.files[0]);
-                $("#uploaded-image").toggleClass('d-none');
-
-              });
-
-              $("#crop-image").click(function(event){
-
-                $image_crop.croppie("result", {
-                  type: "canvas",
-                  size: "viewport"
-                }).then(function(response){
-                  if (post_image === true) {
-                    input = $("<input>").attr("type", "hidden").attr("name", "image").val(response);
-                  }
-                  $('#upload_image_form').append(input).submit();
-                });
-
-              });
-            </script>
           </div>
         </div>
       </div>
@@ -147,4 +122,8 @@
       // renderChoiceLimit:5
     });
   </script>
+@endsection
+
+@section('scripts')
+  <script src="{{ asset('assets/post-thumbnail.js') }}"></script>
 @endsection

@@ -14,17 +14,13 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    {{-- JQuery Cropper --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css" integrity="sha512-zxBiDORGDEAYDdKLuYU9X/JaJo/DPzE42UubfBw9yg8Qvb2YRRIQ8v4KsGHOx2H1/+sdSXyXxLXv5r7tHc9ygg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js" integrity="sha512-Gs+PsXsGkmr+15rqObPJbenQ2wB3qYvTHuJO6YJzPe/dTLvhy0fmae2BcnaozxDo5iaF8emzmCZWbQ1XXiX2Ig==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
     {{-- jQuery plugin wrapper for Cropper.js --}}
-    <script src="{{ asset('build/assets/cropper.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('build/assets/cropper.css') }}">
-    <script src="{{ asset('build/assets/jquery-cropper.js') }}"></script>
+    <script src="{{ asset('assets/cropper.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('assets/cropper.css') }}">
+    <script src="{{ asset('assets/jquery-cropper.js') }}"></script>
 
 </head>
 <body>
@@ -212,5 +208,6 @@
       });
     </script>
   @endif
+  @yield('scripts')
 </body>
 </html>

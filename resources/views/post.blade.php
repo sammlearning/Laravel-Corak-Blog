@@ -56,7 +56,7 @@
                   @csrf
                   @method('PUT')
                   <div class="col-auto">
-                    <img src="{{ asset(Auth::user()->image->url) }}" alt="">
+                    <img class="rounded-circle" src="{{ asset(Auth::user()->image->url) }}" alt="">
                   </div>
                   <div class="form-floating col-6 col-md-7 col-xl-8">
                     <input type="text" class="form-control" id="comment" name="comment" placeholder="Edit your comment" value="{{ $edit_comment->comment }}" required>
@@ -73,7 +73,7 @@
                   @csrf
                   <input type="hidden" name="post_id" value="{{ $post->id }}">
                   <div class="col-auto">
-                    <img src="{{ asset(Auth::user()->image->url) }}" alt="">
+                    <img class="rounded-circle" src="{{ asset(Auth::user()->image->url) }}" alt="">
                   </div>
                   <div class="form-floating col-7 col-md-8 col-xl-9">
                     <input type="text" class="form-control" id="comment" name="comment" placeholder="Add comment" required>
@@ -92,7 +92,12 @@
                 <img src="{{ asset($comment->user->image->url) }}" class="rounded-circle" alt="">
               </div>
               <div class="col-8 comment-info">
-                <span><b>{{ $comment->user->name }}</b></span>
+                <span>
+                  <b>{{ $comment->user->name }}</b>
+                  @if ($comment->user_id == $post->user_id)
+                    <span class="badge rounded-pill bg-primary">Author</span>
+                  @endif
+                </span>
                 <p>{{ $comment->comment }}</p>
                 <span>Published at {{ $comment->created_at }}</span>
               </div>

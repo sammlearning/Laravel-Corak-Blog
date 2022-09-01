@@ -19,7 +19,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       @endif
-      <div data-bs-spy="scroll" data-bs-target="#profile-navbar" data-bs-smooth-scroll="true" class="scrollspy-example-2" tabindex="0">
+      <div data-bs-spy="scroll" data-bs-target="#profile-navbar" data-bs-smooth-scroll="true" class="scrollspy-profile" tabindex="0">
         <div id="myprofile">
           <div class="card profile-page">
             <div class="card-header">
@@ -72,7 +72,7 @@
                 </div>
                 <div class="mb-3">
                   <div class="row">
-                    <div class="col">
+                    <div class="col-md-6 mb-3">
                       <label for="password" class="form-label">New Password</label>
                       <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" aria-describedby="passwordHelp">
                       @error('password')
@@ -83,7 +83,7 @@
                         <div id="passwordHelp" class="form-text">Leave it blank if you do not want to change your password</div>
                       @enderror
                     </div>
-                    <div class="col">
+                    <div class="col-md-6 mb-3">
                       <label for="password-confirm" class="form-label">Confirm Password</label>
                       <input type="password" class="form-control @error('password') is-invalid @enderror" id="password-confirm" name="password_confirmation">
                       @error('password')
@@ -135,103 +135,14 @@
                   </div>
                 </div>
               </form>
-              <script>
-
-                var $image = $('#profile-image');
-                var URL = window.URL || window.webkitURL;
-                var originalImageURL = $image.attr('src');
-                var uploadedImageName = 'cropped.jpg';
-                var uploadedImageType = 'image/jpeg';
-                var uploadedImageURL;
-
-                $('#upload_image').on('change', function(){
-                  $('#loader').removeClass('d-none');
-
-                  var files = this.files;
-                  var file;
-
-                  if (files && files.length) {
-                    file = files[0];
-
-                    if (/^image\/\w+$/.test(file.type)) {
-
-                      uploadedImageName = file.name;
-                      uploadedImageType = file.type;
-
-                      if (uploadedImageURL) {
-                        URL.revokeObjectURL(uploadedImageURL);
-                      }
-
-                      uploadedImageURL = URL.createObjectURL(file);
-                      $image.cropper('destroy').attr('src', uploadedImageURL).cropper({
-                        aspectRatio: 1 / 1,
-                        viewMode: 1,
-                        dragMode: 'move',
-                        crop: function(event) {}
-                      });
-
-                      $('#uploaded-image').removeClass('d-none');
-
-                    } else {
-                      window.alert('Please choose an image file.');
-                    }
-
-                  }
-
-                  $('#loader').addClass('d-none');
-
-                  $("#crop-image").click(function(event){
-                    var cropper = $image.data('cropper'), reader = new FileReader();
-                    cropper.getCroppedCanvas({ width: 400, height: 400, fillColor: '#ffffff' }).toBlob((blob) => {
-                      reader.readAsDataURL(blob);
-                      reader.onloadend = function() {
-                        $('#loader').removeClass('d-none').addClass('m-4');
-                        $('.center-loader-message').html('Uploading your image');
-                        $('#uploaded-image, .inf__drop-area').addClass('d-none');
-                        var input = $("<input>").attr("type", "hidden").attr("name", "image").val(reader.result);
-                        $('#upload_image_form').append(input).submit();
-                      }
-                    });
-                  });
-
-                });
-
-                $('.cropper-action').click(function () {
-                  const action = $(this).attr("data-cropper");
-                  switch (action) {
-                    case 'scaleX-':
-                      $image.cropper("scaleX", -1)
-                      $(this).attr("data-cropper", "scaleX");
-                      break;
-                    case 'scaleX':
-                      $image.cropper("scaleX", 1)
-                      $(this).attr("data-cropper", "scaleX-");
-                      break;
-                    case 'scaleY-':
-                      $image.cropper("scaleY", -1)
-                      $(this).attr("data-cropper", "scaleY");
-                      break;
-                    case 'scaleY':
-                      $image.cropper("scaleY", 1)
-                      $(this).attr("data-cropper", "scaleY-");
-                      break;
-                    case 'rotateRight':
-                      $image.cropper("rotate", 45)
-                      break;
-                    case 'rotateLeft':
-                      $image.cropper("rotate", -45)
-                      break;
-                    default:
-                      break;
-                  }
-                });
-
-              </script>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+@endsection
 
+@section('scripts')
+  <script src="{{ asset('assets/profile-picture.js') }}"></script>
 @endsection

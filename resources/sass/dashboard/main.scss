@@ -149,9 +149,17 @@
         margin-right: 0.5rem;
       }
       .post-image {
-        max-height: 300px;
+        width: 100%;
+        max-width: 300px;
+        border-radius: 10px;
       }
     }
+  }
+  .cropper-view-box {
+    border-radius: unset;
+    box-shadow: unset;
+    outline: 1px solid #39f;
+    outline-color: rgba(51, 153, 255, 0.75);
   }
 }
 
@@ -182,6 +190,17 @@
     }
     .dashboard-content {
       height: 100vh;
+    }
+
+  }
+}
+
+
+// Medium devices (tablets, 768px and up)
+@media (max-width: 768px) {
+  .dashboard {
+    .profile-page .profile-card-body ul {
+      align-items: flex-start;
     }
   }
 }
