@@ -53,7 +53,6 @@ class PostController extends Controller
       $request->validate([
         'subject' => 'required',
         'category' => 'required',
-        'body' => 'required',
         'image' => 'required',
       ]);
 
@@ -140,7 +139,6 @@ class PostController extends Controller
       $request->validate([
         'subject' => 'required',
         'category' => 'required',
-        'body' => 'required',
       ]);
 
       $categories = $request->category;

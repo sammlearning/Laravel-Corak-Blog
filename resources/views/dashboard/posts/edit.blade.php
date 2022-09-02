@@ -33,7 +33,7 @@
             <h5 class="card-header-title">Edit post</h5>
           </div>
           <div class="card-body">
-            <form action="{{route('posts.update', $post->id)}}" method="POST">
+            <form action="{{route('posts.update', $post->id)}}" method="POST" id="update-post-form">
               @method('PUT')
               @csrf
               <div class="mb-3">
@@ -60,7 +60,7 @@
               <div class="mb-3">
                 <div class="mb-3">
                   <label for="postBody" class="form-label">Body</label>
-                  <textarea class="form-control @error('body') is-invalid @enderror" id="postBody" name="body" rows="6" required>{{ $post->body }}</textarea>
+                  <div class="form-control @error('body') is-invalid @enderror" id="postBody">{!! $post->body !!}</div>
                   @error('body')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -68,7 +68,7 @@
                   @enderror
                 </div>
               </div>
-              <button type="submit" class="btn btn-primary">Update</button>
+              <button type="button" class="btn btn-primary" onclick="publish_post('update', 'update-post-form')">Update</button>
               <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
             </form>
           </div>
@@ -105,7 +105,7 @@
                     <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateRight"><i class="bi bi-arrow-clockwise"></i></button>
                     <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateLeft"><i class="bi bi-arrow-counterclockwise"></i></button>
                   </div>
-                  <button type="button" class="btn btn-primary" id="crop-image"><i class="bi bi-upload"></i> Upload image</button>
+                  <button type="button" class="btn btn-primary" onclick="publish_post('image', 'upload_image_form')"><i class="bi bi-upload"></i> Upload image</button>
                 </div>
               </div>
             </form>
@@ -117,13 +117,7 @@
 @endsection
 
 @section('scripts')
-  <script>
-    var multipleCancelButton = new Choices('#postCategory', {
-      removeItemButton: true,
-      // maxItemCount:5,
-      // searchResultLimit:5,
-      // renderChoiceLimit:5
-    });
-  </script>
+  <script src="{{ asset('assets/post.js') }}"></script>
+  <script src="{{ asset('assets/post-body.js') }}"></script>
   <script src="{{ asset('assets/post-thumbnail.js') }}"></script>
 @endsection

@@ -153,6 +153,26 @@
         max-width: 300px;
         border-radius: 10px;
       }
+      .post-thumbnail {
+        max-height: 100px;
+        margin: 0.5rem;
+        border-radius: 5px;
+      }
+      #postsTable {
+        .table-center-items {
+          display: flex;
+          min-height: 115px;
+          align-items: center;
+        }
+        .post-info {
+          display: flex;
+          .post-links {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+          }
+        }
+      }
     }
   }
   .cropper-view-box {
@@ -160,6 +180,22 @@
     box-shadow: unset;
     outline: 1px solid #39f;
     outline-color: rgba(51, 153, 255, 0.75);
+  }
+  #editor-container {
+    height: 375px;
+  }
+
+  .ql-color .ql-picker-options [data-value=color-picker]:before {
+    content: 'Pick Color';
+  }
+
+  .ql-color .ql-picker-options [data-value=color-picker] {
+    background: none !important;
+    width: 100% !important;
+    height: 25px !important;
+    text-align: center;
+    color: blue;
+    text-decoration: underline;
   }
 }
 

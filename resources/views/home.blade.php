@@ -19,8 +19,11 @@
           <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
           <div class="post-info">
             <h5 class="post-title">{{ $post->subject }}</h5>
-            <span>Published at {{ $post->created_at }} By <b>{{ $post->user->name }}</b></span>
-            <p class="post-short-description">{{ $post->body }}</p>
+            <div class="post-date">
+              <span>Published at {{ $post->created_at }}</span>
+              <span>By <b>{{ $post->user->name }}</b></span>
+            </div>
+            <p class="post-short-description">{{ strip_tags($post->body) }}</p>
             <span class="post-categories">
               @foreach ($post->categories as $category)
                 {{ $category->title }} ,

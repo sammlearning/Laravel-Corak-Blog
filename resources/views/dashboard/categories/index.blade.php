@@ -18,7 +18,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Title</th>
+                <th>Category</th>
                 <th>Description</th>
                 <th>Posts</th>
                 <th>Created at</th>
@@ -29,7 +29,7 @@
               @foreach ($categories as $category)
                 <tr>
                   <td>{{ $category->id }}</td>
-                  <td>{{ $category->title }}</td>
+                  <td><a class="profile-link" href="#"> {{ $category->title }} </a></td>
                   <td>{{ $category->description }}</td>
                   <td><span class="badge rounded-pill category-badge">{{ $category->posts_count }}</span></td>
                   <td>{{ $category->created_at }}</td>
@@ -47,7 +47,7 @@
             <tfoot>
               <tr>
                 <th>#</th>
-                <th>Title</th>
+                <th>Category</th>
                 <th>Description</th>
                 <th>Posts</th>
                 <th>Created at</th>

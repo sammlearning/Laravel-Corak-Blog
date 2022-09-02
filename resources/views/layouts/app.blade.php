@@ -17,7 +17,7 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
-    {{-- jQuery plugin wrapper for Cropper.js --}}
+    {{-- jQuery cropper --}}
     <script src="{{ asset('assets/cropper.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/cropper.css') }}">
     <script src="{{ asset('assets/jquery-cropper.js') }}"></script>

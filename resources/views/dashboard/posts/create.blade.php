@@ -26,7 +26,7 @@
             <h5 class="card-header-title">Create a new post</h5>
           </div>
           <div class="card-body">
-            <form action="{{route('posts.store')}}" method="POST" id="upload_image_form">
+            <form action="{{route('posts.store')}}" method="POST" id="publish_post">
               @csrf
               <div class="mb-3">
                 <label for="postSubject" class="form-label">Post subject</label>
@@ -51,7 +51,7 @@
               </div>
               <div class="mb-3">
                 <label for="postBody" class="form-label">Body</label>
-                <textarea class="form-control @error('body') is-invalid @enderror" id="postBody" name="body" rows="6" required>{{ old('body') }}</textarea>
+                <div class="form-control @error('body') is-invalid @enderror" id="postBody">{!! old('body') !!}</div>
                 @error('body')
                   <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>
@@ -80,7 +80,7 @@
                   </div>
                 </div>
               </div>
-              <button type="button" class="btn btn-primary" id="crop-image">Publish</button>
+              <button type="button" class="btn btn-primary" onclick="publish_post('store', 'publish_post')">Publish</button>
               <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
             </form>
           </div>
@@ -91,13 +91,7 @@
 @endsection
 
 @section('scripts')
-  <script>
-        var multipleCancelButton = new Choices('#postCategory', {
-        removeItemButton: true,
-        // maxItemCount:5,
-        // searchResultLimit:5,
-        // renderChoiceLimit:5
-      });
-  </script>
+  <script src="{{ asset('assets/post.js') }}"></script>
+  <script src="{{ asset('assets/post-body.js') }}"></script>
   <script src="{{ asset('assets/post-thumbnail.js') }}"></script>
 @endsection

@@ -24,10 +24,14 @@
     <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
 
-    {{-- jQuery plugin wrapper for Cropper.js --}}
+    {{-- jQuery cropper --}}
     <script src="{{ asset('assets/cropper.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('assets/cropper.css') }}">
     <script src="{{ asset('assets/jquery-cropper.js') }}"></script>
+
+    {{-- Quill editor --}}
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
   </head>
 <body class="dashboard">

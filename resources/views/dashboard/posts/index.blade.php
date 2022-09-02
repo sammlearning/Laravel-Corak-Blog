@@ -18,8 +18,7 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th>Post author</th>
-                <th>Post subject</th>
+                <th>Post</th>
                 {{-- <th>Body</th> --}}
                 <th>Categories</th>
                 <th>Comments</th>
@@ -30,26 +29,49 @@
             <tbody>
               @foreach ($posts as $post)
                 <tr>
-                  <td>{{ $post->id }}</td>
-                  <td><a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $post->user->name }}</a></td>
-                  <td><a class="profile-link" href="{{ route('posts.show', $post->id) }}">{{ $post->subject }}</a></td>
+                  <td>
+                    <div class="table-center-items ms-4">
+                      {{ $post->id }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="post-info">
+                      <a href="{{ route('posts.show', $post->id) }}">
+                        <img src="{{ asset($post->image->url) }}" class="post-thumbnail">
+                      </a>
+                      <div class="post-links">
+                        <h6><b><a class="profile-link" href="{{ route('posts.show', $post->id) }}">{{ $post->subject }}</a></b></h6>
+                        <a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $post->user->name }}</a>
+                      </div>
+                    </div>
+                  </td>
                   {{-- <td>{{ $post->body }}</td> --}}
                   <td>
+                    <div class="table-center-items">
                     @foreach ($post->categories as $category)
-                      <a href="#"><span class="badge rounded-pill category-badge">{{$category->title}}</span></a>
+                      <a href="#" class="ms-1"><span class="badge rounded-pill category-badge">{{$category->title}}</span></a>
                     @endforeach
+                  </div>
                   </td>
                   <td>
-                    <span class="badge rounded-pill category-badge">{{ $post->comments->Count() }}</span>
+                    <div class="table-center-items">
+                      <span class="badge rounded-pill category-badge">{{ $post->comments->Count() }}</span>
+                    </div>
                   </td>
-                  <td>{{ $post->created_at }}</td>
                   <td>
-                    <form action="{{route('posts.destroy', $post->id)}}" method="POST">
-                      @method('DELETE')
-                      @csrf
-                      <a class="btn btn-sm btn-light me-2" href="{{ route('posts.edit', $post->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
-                      <button class="btn btn-sm btn-light" type="submit"><i class="bi bi-trash3 me-1"></i> Delete</button>
-                    </form>
+                    <div class="table-center-items">
+                      {{ $post->created_at }}
+                    </div>
+                  </td>
+                  <td>
+                    <div class="table-center-items">
+                      <form action="{{route('posts.destroy', $post->id)}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <a class="btn btn-sm btn-light me-2" href="{{ route('posts.edit', $post->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
+                        <button class="btn btn-sm btn-light" type="submit"><i class="bi bi-trash3 me-1"></i> Delete</button>
+                      </form>
+                    </div>
                   </td>
                 </tr>
               @endforeach
@@ -57,8 +79,7 @@
             <tfoot>
               <tr>
                 <th>#</th>
-                <th>Post author</th>
-                <th>Post subject</th>
+                <th>Post</th>
                 {{-- <th>Body</th> --}}
                 <th>Categories</th>
                 <th>Comments</th>
