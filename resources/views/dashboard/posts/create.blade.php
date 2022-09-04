@@ -9,6 +9,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         @endif
+        @if (session('No categories'))
+          <div class="alert alert-warning alert-dismissible fade show shadow-sm" role="alert">
+            {{ session('No categories') }}
+          </div>
+        @endif
         @if (session('No posts'))
           <div class="alert alert-primary alert-dismissible fade show" role="alert">
             {{ session('No posts') }}
@@ -28,7 +33,7 @@
           <div class="card-body">
             <form action="{{route('posts.store')}}" method="POST" id="publish_post">
               @csrf
-              <div class="mb-3">
+              <div class="mb-3 publish_post_form_group">
                 <label for="postSubject" class="form-label">Post subject</label>
                 <input type="text" class="form-control @error('subject') is-invalid @enderror" id="postSubject" name="subject" value="{{ old('subject') }}" required>
                 @error('subject')
@@ -37,7 +42,7 @@
                   </span>
                 @enderror
               </div>
-              <div class="mb-3">
+              <div class="mb-3 publish_post_form_group">
                 @error('category')
                   <label for="postCategory" class="form-label text-danger">{{ $message }}</label>
                 @else
@@ -49,7 +54,7 @@
                   @endforeach
                 </select>
               </div>
-              <div class="mb-3">
+              <div class="mb-3 publish_post_form_group">
                 <label for="postBody" class="form-label">Body</label>
                 <div class="form-control @error('body') is-invalid @enderror" id="postBody">{!! old('body') !!}</div>
                 @error('body')
@@ -63,6 +68,12 @@
                   <span class="inf__btn">Choose files</span>
                   <span class="inf__hint">or drag and drop files here</span>
                   <input type="file" name="upload_image" id="upload_image" required>
+                </div>
+                <div class="center-loader text-primary d-none" id="loader">
+                  <h4 class="center-loader-message">Loading your image</h4>
+                  <div class="spinner-grow" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
                 </div>
                 <div class="d-none" id="uploaded-image">
                   <div class="mt-4">
@@ -80,8 +91,10 @@
                   </div>
                 </div>
               </div>
-              <button type="button" class="btn btn-primary" onclick="publish_post('store', 'publish_post')">Publish</button>
-              <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
+              <div class="publish_post_form_group">
+                <button type="button" class="btn btn-primary" onclick="publish_post('store', 'publish_post')">Publish</button>
+                <a href="{{ route('posts.index') }}" class="btn btn-secondary ms-2">Cancel</a>
+              </div>
             </form>
           </div>
         </div>

@@ -8,6 +8,7 @@ use App\Models\Image;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
@@ -21,12 +22,25 @@ class PostController extends Controller
     {
 
       $posts = Post::with(['categories'])->get();
+      $categories = Category::get();
+
+      if (DB::table('featured_post')->doesntExist()) {
+        DB::table('featured_post')->insert([
+          'status' => 0,
+          'post_id' => 0,
+        ]);
+      }
+
+      $featured_post = DB::table('featured_post')->first();
 
       if ($posts->isEmpty()) {
+        if ($categories->isEmpty()) {
+          return redirect()->route('posts.create')->with(['No posts' => 'There are no published posted. You can post a new post from this page.', 'No categories' => 'It seems that you have not created any categories yet, you must create one before you start publishing posts.']);
+        }
         return redirect()->route('posts.create')->with('No posts', 'There are no published posted. You can post a new post from this page.');
       }
 
-      return view('dashboard.posts.index', ['posts' => $posts]);
+      return view('dashboard.posts.index', compact('posts', 'featured_post'));
 
     }
 

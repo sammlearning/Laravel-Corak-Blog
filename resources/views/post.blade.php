@@ -12,7 +12,13 @@
         </div>
       </div>
       <img class="post-img" src="{{ asset($post->image->url) }}">
-      <div class="post-body">{!! $post->body !!}</div>
+      <div class="post-body">
+        <div class="ql-snow">
+          <div class="ql-editor" style="height: inherit; outline: inherit; overflow: inherit; padding: inherit; white-space: inherit;">
+            {!! $post->body !!}
+          </div>
+        </div>
+      </div>
       <div class="post-categories" id="post-page-comments">
         @foreach ($post->categories as $category)
           <a href="#"><span class="badge rounded-pill post-category">{{ $category->title }}</span></a>

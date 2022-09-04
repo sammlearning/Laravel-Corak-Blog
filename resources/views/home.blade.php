@@ -3,17 +3,19 @@
 @section('content')
   <div class="row">
     <div class="col-lg-8">
-      <div class="featured-post" style="background-image: url('{{asset('images/post7.jpg')}}')">
-        <div class="post-info">
-          <h4 class="post-title">How to play Euro Truck Simulator 2 on low PC</h4>
-          <span>Published at 12/8/2022 By <b>Ahmed Nabil</b></span>
-          <div class="post-categories">
-            <a href="#"><span class="badge rounded-pill post-category">Gaming</span></a>
-            <a href="#"><span class="badge rounded-pill post-category">Technology</span></a>
-            <a href="#"><span class="badge rounded-pill post-category">Internet</span></a>
+      @if ($featured_post != false)
+        <div class="featured-post" style="background-image: url('{{asset($featured_post->image->url)}}')">
+          <div class="post-info">
+            <h4 class="post-title">{{ $featured_post->subject }}</h4>
+            <span>Published at {{ $featured_post->created_at }} By <b>{{ $featured_post->user->name }}</b></span>
+            <div class="post-categories">
+              @foreach ($featured_post->categories as $category)
+                <a href="#"><span class="badge rounded-pill post-category">{{ $category->title }}</span></a>
+              @endforeach
+            </div>
           </div>
         </div>
-      </div>
+      @endif
       @foreach ($posts as $post)
         <div class="post">
           <img class="post-img" src="{{ asset($post->image->url) }}" alt="">

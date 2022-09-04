@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="{{ asset('assets/cropper.css') }}">
     <script src="{{ asset('assets/jquery-cropper.js') }}"></script>
 
+    {{-- Quill --}}
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
 </head>
 <body>
   <nav class="navbar navbar-dark navbar-expand-lg navtop">

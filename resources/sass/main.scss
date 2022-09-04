@@ -204,6 +204,18 @@ main{
   }
 }
 
+.center-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+}
+.center-loader-message {
+  margin-right: 0.5rem;
+  margin-bottom: 0;
+}
+
 .pagination {
   justify-content: center;
   margin-top: 2rem;

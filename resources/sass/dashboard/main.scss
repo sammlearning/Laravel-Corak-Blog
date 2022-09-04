@@ -163,10 +163,13 @@
           display: flex;
           min-height: 115px;
           align-items: center;
+          white-space: nowrap;
         }
         .post-info {
           display: flex;
+          margin-right: 1rem;
           .post-links {
+            white-space: nowrap;
             display: flex;
             flex-direction: column;
             justify-content: center;

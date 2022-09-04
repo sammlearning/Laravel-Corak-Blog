@@ -29,8 +29,8 @@ function publish_post(action, formID) {
           reader.onloadend = function() {
             var input2 = $("<input>").attr("type", "hidden").attr("name", "image").val(reader.result);
             $('#loader').removeClass('d-none').addClass('m-4');
-            $('.center-loader-message').html('Uploading your image');
-            $('#uploaded-image, .inf__drop-area').addClass('d-none');
+            $('.center-loader-message').html('Your post is being published');
+            $('#uploaded-image, .inf__drop-area, .publish_post_form_group').addClass('d-none');
             $('#' + formID).append(input1, input2).submit();
           }
         });

@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\FeaturedPost;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -21,7 +23,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+Route::get('home', [HomeController::class, 'index']);
 
 Route::middleware(['auth', 'admin'])->group(function () {
   Route::get('dashboard', function () {
@@ -32,6 +36,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     'dashboard/categories' => CategoryController::class,
     'dashboard/users' => UserController::class,
   ]);
+  Route::put('dashboard/featured', [FeaturedPost::class, 'update'])->name('post.featured');
 });
 
 Route::middleware('auth')->group(function () {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -26,10 +27,28 @@ class HomeController extends Controller
     public function index()
     {
 
+      if (DB::table('featured_post')->doesntExist()) {
+        DB::table('featured_post')->insert([
+          'status' => 0,
+          'post_id' => 0,
+        ]);
+      }
+
+      $post = DB::table('featured_post')->first();
+
+      if ($post->status != 0) {
+        $featured_post = Post::find($post->post_id);
+        if (!$featured_post) {
+          $featured_post = false;
+        }
+      } else {
+        $featured_post = false;
+      }
+
       $posts = Post::with(['categories'])->orderBy('id', 'DESC')->get();
       $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
       $latest_posts = Post::orderByDesc('id')->limit(7)->get();
-      return view('home', compact('posts', 'popular_posts', 'latest_posts'));
+      return view('home', compact('posts', 'popular_posts', 'latest_posts', 'featured_post'));
 
     }
 }

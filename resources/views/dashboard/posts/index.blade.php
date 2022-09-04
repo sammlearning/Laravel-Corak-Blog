@@ -9,12 +9,49 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       @endif
+      <div class="dashboard-card mb-3">
+        <div class="card-header">
+          <h5 class="card-header-title">Featured Post</h5>
+        </div>
+        <div class="card-body">
+          <form action="{{ route('post.featured') }}" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="row">
+              <div class="col-12">
+                <div class="form-check form-switch @error('featured_status') is-invalid @enderror">
+                  <input class="form-check-input" type="checkbox" role="switch" id="featured_status" name="featured_status" {{ $featured_post->status == 1 ? 'checked' : '' }}>
+                  <label class="form-check-label" for="featured_status">Enable featured post</label>
+                  @error('featured_status')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+              </div>
+              <div class="col-12 mt-3">
+                <select id="featured" placeholder="Search for post" name="featured_post">
+                  @foreach ($posts as $post)
+                    <option value="{{$post->id}}" {{ $featured_post->post_id == $post->id ? 'selected' : '' }}>{{$post->subject}}</option>
+                  @endforeach
+                </select>
+                @error('featured_post')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Update</button>
+          </form>
+        </div>
+      </div>
       <div class="dashboard-card">
         <div class="card-header">
           <h5 class="card-header-title">Manage Posts</h5>
         </div>
-        <div class="card-body">
-          <table id="postsTable" class="table table-striped" style="width:100%">
+        <div class="card-body" style="overflow: auto">
+          <table id="postsTable" class="table table-striped table-responsive">
             <thead>
               <tr>
                 <th>#</th>
@@ -30,7 +67,7 @@
               @foreach ($posts as $post)
                 <tr>
                   <td>
-                    <div class="table-center-items ms-4">
+                    <div class="table-center-items ms-1">
                       {{ $post->id }}
                     </div>
                   </td>
@@ -92,11 +129,20 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
   <script>
     $(document).ready(function () {
       $('#postsTable').DataTable({
         "order": [ 0, 'desc' ]
       });
+    });
+    var multipleCancelButton = new Choices('#featured', {
+      removeItemButton: true,
+      maxItemCount:1,
+      // searchResultLimit:5,
+      // renderChoiceLimit:5
     });
   </script>
 @endsection
