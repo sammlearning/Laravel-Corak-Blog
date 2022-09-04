@@ -105,8 +105,9 @@ class PostController extends Controller
 
       $post = Post::findOrFail($id);
       $comments = Comment::where('post_id', $post->id)->orderBy('id', 'DESC')->get();
-
-      return view('post', compact('post', 'comments'));
+      $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
+      $latest_posts = Post::orderByDesc('id')->limit(7)->get();
+      return view('post', compact('post', 'comments', 'popular_posts', 'latest_posts'));
 
     }
 

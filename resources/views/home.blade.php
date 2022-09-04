@@ -56,31 +56,31 @@
     <div class="col-lg-4">
       <div class="sidebar-posts">
         <div class="sidebar-posts-title">
-          <h5>Top posts</h5>
+          <h5>Popular posts</h5>
         </div>
-        @for ($x = 1; $x <= 7; $x++)
-          <a class="post post-small" href="#">
-            <img class="post-img" src="{{asset('images/post'.$x.'.jpg')}}" alt="">
+        @foreach ($popular_posts as $post)
+          <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
+            <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
             <div class="post-info">
-              <b class="post-title">Nulla malesuada tincidunt lacus, eu mattis augue pretium iaculis.</b>
-              <span>Published at 12/8/2022</span>
+              <b class="post-title">{{ $post->subject }}</b>
+              <span>Published at {{ $post->created_at }}</span>
             </div>
           </a>
-        @endfor
+        @endforeach
       </div>
       <div class="sidebar-posts">
         <div class="sidebar-posts-title">
           <h5>Latest posts</h5>
         </div>
-        @for ($x = 1; $x <= 7; $x++)
-          <a class="post post-small" href="#">
-            <img class="post-img" src="{{asset('images/post'.$x.'.jpg')}}" alt="">
+        @foreach ($latest_posts as $post)
+          <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
+            <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
             <div class="post-info">
-              <b class="post-title">Nulla malesuada tincidunt lacus, eu mattis augue pretium iaculis.</b>
-              <span>Published at 12/8/2022</span>
+              <b class="post-title">{{ $post->subject }}</b>
+              <span>Published at {{ $post->created_at }}</span>
             </div>
           </a>
-        @endfor
+        @endforeach
       </div>
     </div>
   </div>

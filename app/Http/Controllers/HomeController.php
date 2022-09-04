@@ -27,7 +27,9 @@ class HomeController extends Controller
     {
 
       $posts = Post::with(['categories'])->orderBy('id', 'DESC')->get();
-      return view('home', ['posts' => $posts]);
+      $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
+      $latest_posts = Post::orderByDesc('id')->limit(7)->get();
+      return view('home', compact('posts', 'popular_posts', 'latest_posts'));
 
     }
 }

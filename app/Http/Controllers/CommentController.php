@@ -77,11 +77,13 @@ class CommentController extends Controller
       }
 
       $post = Post::findOrFail($comment->post_id);
+      $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
+      $latest_posts = Post::orderByDesc('id')->limit(7)->get();
       $comments = Comment::where('post_id', $post->id)->orderBy('id', 'DESC')->get();
 
       $edit_comment = $comment;
 
-      return view('post', compact('post', 'comments', 'edit_comment'))->with('scroll', '#post-page-comments');
+      return view('post', compact('post', 'comments', 'edit_comment', 'popular_posts', 'latest_posts'))->with('scroll', '#post-page-comments');
 
     }
 
