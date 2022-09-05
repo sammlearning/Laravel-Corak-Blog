@@ -18,8 +18,11 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-          'imageable_id' => User::factory(),
+          'rid' => 'profile',
           'url' => 'images/profile.png',
+          'url_md' => 'images/profile.png',
+          'url_sm' => 'images/profile.png',
+          'imageable_id' => User::factory(),
         ];
     }
 }

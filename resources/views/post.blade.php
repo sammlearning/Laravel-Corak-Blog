@@ -60,7 +60,7 @@
                 @csrf
                 @method('PUT')
                 <div class="col-auto">
-                  <img class="rounded-circle" src="{{ asset(Auth::user()->image->url) }}" alt="">
+                  <img class="rounded-circle" src="{{ asset(Auth::user()->image->url_md) }}" alt="">
                 </div>
                 <div class="form-floating col-6 col-md-7 col-xl-8">
                   <input type="text" class="form-control" id="comment" name="comment" placeholder="Edit your comment" value="{{ $edit_comment->comment }}" required>
@@ -77,7 +77,7 @@
                 @csrf
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                 <div class="col-auto">
-                  <img class="rounded-circle" src="{{ asset(Auth::user()->image->url) }}" alt="">
+                  <img class="rounded-circle" src="{{ asset(Auth::user()->image->url_md) }}" alt="">
                 </div>
                 <div class="form-floating col-7 col-md-8 col-xl-9">
                   <input type="text" class="form-control" id="comment" name="comment" placeholder="Add comment" required>
@@ -93,7 +93,7 @@
         @foreach ($comments as $comment)
           <div class="row g-3 comment">
             <div class="col-auto">
-              <img src="{{ asset($comment->user->image->url) }}" class="rounded-circle" alt="">
+              <img src="{{ asset($comment->user->image->url_md) }}" class="rounded-circle" alt="">
             </div>
             <div class="col-8 comment-info">
               <span>
@@ -129,7 +129,7 @@
       </div>
       @foreach ($popular_posts as $post)
         <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
-          <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
+          <img class="post-img" src="{{ asset($post->image->url_sm) }}" alt="">
           <div class="post-info">
             <b class="post-title">{{ $post->subject }}</b>
             <span>Published at {{ $post->created_at }}</span>
@@ -143,7 +143,7 @@
       </div>
       @foreach ($latest_posts as $post)
         <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
-          <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
+          <img class="post-img" src="{{ asset($post->image->url_sm) }}" alt="">
           <div class="post-info">
             <b class="post-title">{{ $post->subject }}</b>
             <span>Published at {{ $post->created_at }}</span>

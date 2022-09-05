@@ -25,6 +25,10 @@
     {{-- Quill --}}
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
+    {{-- Compressor --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js" integrity="sha512-odNmoc1XJy5x1TMVMdC7EMs3IVdItLPlCeL5vSUPN2llYKMJ2eByTTAIiiuqLg+GdNr9hF6z81p27DArRFKT7A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.1.1/compressor.min.js" integrity="sha512-VaRptAfSxXFAv+vx33XixtIVT9A/9unb1Q8fp63y1ljF+Sbka+eMJWoDAArdm7jOYuLQHVx5v60TQ+t3EA8weA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </head>
 <body>
   <nav class="navbar navbar-dark navbar-expand-lg navtop">
@@ -73,7 +77,7 @@
         @else
           <li class="nav-item dropdown">
             <a id="navtop-profile-dropdown" class="nav-link dropdown-toggle navtop-profile-dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{ asset(Auth::user()->image->url) }}" class="rounded-circle navtop-profile-image" alt="Profile image"> {{ Auth::user()->name }}
+              <img src="{{ asset(Auth::user()->image->url_sm) }}" class="rounded-circle navtop-profile-image" alt="Profile image"> {{ Auth::user()->name }}
             </a>
             <ul class="dropdown-menu">
               @if (Auth::user()->is_admin)

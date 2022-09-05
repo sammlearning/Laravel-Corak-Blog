@@ -35,9 +35,9 @@ class PostController extends Controller
 
       if ($posts->isEmpty()) {
         if ($categories->isEmpty()) {
-          return redirect()->route('posts.create')->with(['No posts' => 'There are no published posted. You can post a new post from this page.', 'No categories' => 'It seems that you have not created any categories yet, you must create one before you start publishing posts.']);
+          return redirect()->route('posts.create')->with(['No posts' => 'There are no published posts. You can create a new post from this page.', 'No categories' => 'It seems that you have not created any categories yet, you must create one before you start publishing posts.']);
         }
-        return redirect()->route('posts.create')->with('No posts', 'There are no published posted. You can post a new post from this page.');
+        return redirect()->route('posts.create')->with('No posts', 'There are no published posts. You can create a new post from this page.');
       }
 
       return view('dashboard.posts.index', compact('posts', 'featured_post'));
@@ -67,7 +67,9 @@ class PostController extends Controller
       $request->validate([
         'subject' => 'required',
         'category' => 'required',
-        'image' => 'required',
+        'image_lg' => 'required',
+        'image_md' => 'required',
+        'image_sm' => 'required',
       ]);
 
       $categories = $request->category;
@@ -80,28 +82,34 @@ class PostController extends Controller
 
       $post->categories()->attach($categories);
 
+      $images = collect([
+        ['image_lg', ''],
+        ['image_md', '-md'],
+        ['image_sm', '-sm']
+      ]);
+
+      $id = Str()->random(10);
+
       // Upload post image
+      for ($i=0; $i < $images->count(); $i++) {
 
-      $image_64 = $request->image; //your base64 encoded data
+        $input = $images[$i][0];
+        $image_64 = $request->$input; //your base64 encoded data
+        // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+        $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+        // find substring fro replace here eg: data:image/png;base64,
+        $uploaded_image = str_replace($replace, '', $image_64);
+        $uploaded_image = str_replace(' ', '+', $uploaded_image);
+        $imageName = 'posts/'.$id.$images[$i][1].'.png';
+        Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
 
-      // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
-
-      $replace = substr($image_64, 0, strpos($image_64, ',')+1);
-
-      // find substring fro replace here eg: data:image/png;base64,
-
-      $uploaded_image = str_replace($replace, '', $image_64);
-
-      $uploaded_image = str_replace(' ', '+', $uploaded_image);
-
-      $imageName = 'posts/'.Str()->random(10).'.png';
-
-      Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
+      }
 
       $image = new Image;
-
-      $image->url = 'storage/'.$imageName;
-
+      $image->rid = $id;
+      $image->url = 'storage/posts/'.$id.'.png';
+      $image->url_md = 'storage/posts/'.$id.'-md.png';
+      $image->url_sm = 'storage/posts/'.$id.'-sm.png';
       $post->image()->save($image);
 
       return redirect()->route('posts.index')->with('success', 'Post published successfully');

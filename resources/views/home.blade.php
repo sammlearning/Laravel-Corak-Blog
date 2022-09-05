@@ -18,7 +18,7 @@
       @endif
       @foreach ($posts as $post)
         <div class="post">
-          <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
+          <img class="post-img image-loader" src="{{ asset($post->image->url_md) }}">
           <div class="post-info">
             <h5 class="post-title">{{ $post->subject }}</h5>
             <div class="post-date">
@@ -62,7 +62,7 @@
         </div>
         @foreach ($popular_posts as $post)
           <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
-            <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
+            <img class="post-img image-loader" src="{{ asset($post->image->url_sm) }}" alt="">
             <div class="post-info">
               <b class="post-title">{{ $post->subject }}</b>
               <span>Published at {{ $post->created_at }}</span>
@@ -76,7 +76,7 @@
         </div>
         @foreach ($latest_posts as $post)
           <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
-            <img class="post-img" src="{{ asset($post->image->url) }}" alt="">
+            <img class="post-img image-loader" src="{{ asset($post->image->url_sm) }}" alt="">
             <div class="post-info">
               <b class="post-title">{{ $post->subject }}</b>
               <span>Published at {{ $post->created_at }}</span>

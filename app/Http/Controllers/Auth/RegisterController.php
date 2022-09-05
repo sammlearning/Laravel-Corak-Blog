@@ -81,7 +81,10 @@ class RegisterController extends Controller
       ]);
 
       $image = new Image;
+      $image->rid = 'profile';
       $image->url = 'images/profile.png';
+      $image->url_md = 'images/profile.png';
+      $image->url_sm = 'images/profile.png';
       $user->image()->save($image);
 
       return $user;

@@ -42,15 +42,43 @@ $('#upload_image').on('change', function(){
   $('#loader').addClass('d-none');
 
   $("#crop-image").click(function(event){
-    var cropper = $image.data('cropper'), reader = new FileReader();
+    var cropper = $image.data('cropper'), reader = new FileReader(), input1, input2, input3;
     cropper.getCroppedCanvas({ width: 400, height: 400, fillColor: '#ffffff' }).toBlob((blob) => {
       reader.readAsDataURL(blob);
       reader.onloadend = function() {
-        $('#loader').removeClass('d-none').addClass('m-4');
-        $('.center-loader-message').html('Uploading your image');
-        $('#uploaded-image, .inf__drop-area').addClass('d-none');
-        var input = $("<input>").attr("type", "hidden").attr("name", "image").val(reader.result);
-        $('#upload_image_form').append(input).submit();
+        input1 = $("<input>").attr("type", "hidden").attr("name", "image_lg").val(reader.result);
+        new Compressor(blob, {
+          width: 100,
+          height: 100,
+          quality: 0.5,
+          success(result1) {
+            reader.readAsDataURL(result1);
+            reader.onloadend = function() {
+              input2 = $("<input>").attr("type", "hidden").attr("name", "image_md").val(reader.result);
+              new Compressor(blob, {
+                width: 50,
+                height: 50,
+                quality: 0.5,
+                success(result2) {
+                  reader.readAsDataURL(result2);
+                  reader.onloadend = function() {
+                    input3 = $("<input>").attr("type", "hidden").attr("name", "image_sm").val(reader.result);
+                    $('#loader').removeClass('d-none').addClass('m-4');
+                    $('.center-loader-message').html('Uploading your image');
+                    $('#uploaded-image, .inf__drop-area').addClass('d-none');
+                    $('#upload_image_form').append(input1, input2, input3).submit();
+                  }
+                },
+                error(err) {
+                  console.log(err.message);
+                },
+              });
+            }
+          },
+          error(err) {
+            console.log(err.message);
+          },
+        });
       }
     });
   });

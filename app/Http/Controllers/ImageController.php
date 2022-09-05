@@ -13,63 +13,63 @@ class ImageController extends Controller {
   public function user(Request $request) {
 
     $request->validate([
-      'image' => 'required',
+      'image_lg' => 'required',
+      'image_md' => 'required',
+      'image_sm' => 'required',
     ]);
 
-    $image_64 = $request->image; //your base64 encoded data
-
-    // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
-
-    $replace = substr($image_64, 0, strpos($image_64, ',')+1);
-
-    // find substring fro replace here eg: data:image/png;base64,
-
-    $uploaded_image = str_replace($replace, '', $image_64);
-
-    $uploaded_image = str_replace(' ', '+', $uploaded_image);
+    $images = collect([
+      ['image_lg', ''],
+      ['image_md', '-md'],
+      ['image_sm', '-sm']
+    ]);
 
     $user = Auth::user();
+    $id = Str()->random(10);
 
-    if ($user->image->url != 'images/profile.png') {
-      // storage/4GCnOZ3Lc7.png
-      $imageName = $user->image->url;
-      // storage/4GCnOZ3Lc7.png > 4GCnOZ3Lc7.png
-      $imageName = substr($imageName, 8);
-    } else {
-      // 4GCnOZ3Lc7.png
-      $imageName = Str()->random(10).'.png';
+    // Update user image
+    for ($i=0; $i < $images->count(); $i++) {
+
+      $input = $images[$i][0];
+      $image_64 = $request->$input; //your base64 encoded data
+      // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+      $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+      // find substring fro replace here eg: data:image/png;base64,
+      $uploaded_image = str_replace($replace, '', $image_64);
+      $uploaded_image = str_replace(' ', '+', $uploaded_image);
+
+      if ($user->image->url == 'images/profile.png') {
+        $imageName = $id.$images[$i][1].'.png';
+      } else {
+        $imageName = $user->image->rid.$images[$i][1].'.png';
+      }
+
+      Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
+
     }
 
-    Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
-
-    $image = $user->image;
-    $image->url = 'storage/'.$imageName;
-
-    $image->save();
+    if ($user->image->url == 'images/profile.png') {
+      $image = $user->image;
+      $image->rid = $id;
+      $image->url = 'storage/'.$id.'.png';
+      $image->url_md = 'storage/'.$id.'-md.png';
+      $image->url_sm = 'storage/'.$id.'-sm.png';
+      $image->save();
+    }
 
     return redirect()->route('profile.index')->with('profile picture', 'Profile picture updated successfully');
 
   }
 
-  // Upload post image
+  // Update post image
   public function post(Request $request) {
 
     $request->validate([
       'post' => 'integer',
-      'image' => 'required',
+      'image_lg' => 'required',
+      'image_md' => 'required',
+      'image_sm' => 'required',
     ]);
-
-    $image_64 = $request->image; //your base64 encoded data
-
-    // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
-
-    $replace = substr($image_64, 0, strpos($image_64, ',')+1);
-
-    // find substring fro replace here eg: data:image/png;base64,
-
-    $uploaded_image = str_replace($replace, '', $image_64);
-
-    $uploaded_image = str_replace(' ', '+', $uploaded_image);
 
     $post = Post::findOrFail($request->post);
 
@@ -77,12 +77,26 @@ class ImageController extends Controller {
       return redirect()->route('posts.index');
     }
 
-    // storage/posts/4GCnOZ3Lc7.png
-    $imageName = $post->image->url;
-    // storage/posts/4GCnOZ3Lc7.png > posts/4GCnOZ3Lc7.png
-    $imageName = substr($imageName, 8);
+    $images = collect([
+      ['image_lg', ''],
+      ['image_md', '-md'],
+      ['image_sm', '-sm']
+    ]);
 
-    Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
+    // Update post image
+    for ($i=0; $i < $images->count(); $i++) {
+
+      $input = $images[$i][0];
+      $image_64 = $request->$input; //your base64 encoded data
+      // $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+      $replace = substr($image_64, 0, strpos($image_64, ',')+1);
+      // find substring fro replace here eg: data:image/png;base64,
+      $uploaded_image = str_replace($replace, '', $image_64);
+      $uploaded_image = str_replace(' ', '+', $uploaded_image);
+      $imageName = 'posts/'.$post->image->rid.$images[$i][1].'.png';
+      Storage::disk('public')->put($imageName, base64_decode($uploaded_image));
+
+    }
 
     return redirect()->route('posts.edit', $post->id)->with('success', 'Post image updated successfully');
 

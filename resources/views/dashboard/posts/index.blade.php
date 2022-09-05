@@ -74,11 +74,11 @@
                   <td>
                     <div class="post-info">
                       <a href="{{ route('posts.show', $post->id) }}">
-                        <img src="{{ asset($post->image->url) }}" class="post-thumbnail">
+                        <img src="{{ asset($post->image->url_sm) }}" class="post-thumbnail">
                       </a>
                       <div class="post-links">
                         <h6><b><a class="profile-link" href="{{ route('posts.show', $post->id) }}">{{ $post->subject }}</a></b></h6>
-                        <a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $post->user->name }}</a>
+                        <a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url_sm) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $post->user->name }}</a>
                       </div>
                     </div>
                   </td>
