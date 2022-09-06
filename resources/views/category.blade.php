@@ -3,19 +3,7 @@
 @section('content')
   <div class="row">
     <div class="col-lg-8">
-      @if ($featured_post != false)
-        <div class="featured-post" style="background-image: url('{{asset($featured_post->image->url)}}')">
-          <div class="post-info">
-            <h4 class="post-title">{{ $featured_post->subject }}</h4>
-            <span>Published at {{ $featured_post->created_at }} By <b>{{ $featured_post->user->name }}</b></span>
-            <div class="post-categories">
-              @foreach ($featured_post->categories as $category)
-                <a href="{{ route('categories.show', $category->id) }}"><span class="badge text-bg-light text-decoration-none">{{ $category->title }}</span></a>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      @endif
+      <h5 class="mb-3">{{ $category->posts->count() }} published {{ $category->posts->count() > 1 ? 'posts' : 'post' }} in the <b>{{ $category->title }}</b> category</h5>
       @foreach ($posts as $post)
         <div class="post" style="transform: rotate(0);">
           <img class="post-img image-loader" src="{{ asset($post->image->url_md) }}">
@@ -28,7 +16,7 @@
             <p class="post-short-description">{{ strip_tags($post->body) }}</p>
             <span class="post-categories">
               @foreach ($post->categories as $category)
-                <span class="badge text-bg-light text-decoration-none"> {{ $category->title }} </span>
+                <a class="badge text-bg-light text-decoration-none" href="{{ route('categories.show', $category->id) }}"> {{ $category->title }} </a>
               @endforeach
             </span>
             <a class="btn post-read-more stretched-link" href="{{route('posts.show', $post->id)}}">Read more <i class="bi bi-chevron-right"></i></a>

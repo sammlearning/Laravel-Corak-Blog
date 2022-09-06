@@ -123,14 +123,16 @@ main{
     .post-title {
       font-weight: bold;
     }
-    .post-category {
-      background-color: $primary-color;
-    }
-    .post-categories a:hover {
-      .post-category {
-        background-color: $primary-color-alt;
-      }
-    }
+  }
+}
+
+.post-category {
+  background-color: $primary-color;
+}
+
+.post-categories a:hover {
+  .post-category {
+    background-color: $primary-color-alt;
   }
 }
 
@@ -168,10 +170,20 @@ main{
 
     .post-read-more {
       @include primary_btn;
+      color: $primary-color;
+      background-color: #ffffff;
     }
     .post-read-more:hover {
       @include primary_btn_hover;
+      color: $primary-color-alt;
+      background-color: #ffffff;
+
     }
+  }
+}
+.post:hover {
+  .post-title {
+    color: $primary-color;
   }
 }
 

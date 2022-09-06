@@ -8,7 +8,7 @@
         <h4 class="post-title">{{ $post->subject }}</h4>
         <div class="post-date">
           <span>Published at {{ $post->created_at }}</span>
-          <span>By <b>{{ $post->user->name }}</b></span>
+          <span>By <a href="{{ route('users.show', $post->user->id) }}"><b>{{ $post->user->name }}</b></a></span>
         </div>
       </div>
       <img class="post-img" src="{{ asset($post->image->url) }}">
@@ -19,9 +19,9 @@
           </div>
         </div>
       </div>
-      <div class="post-categories" id="post-page-comments">
+      <div class="post-categories mt-2" id="post-page-comments">
         @foreach ($post->categories as $category)
-          <a href="#"><span class="badge rounded-pill post-category">{{ $category->title }}</span></a>
+          <a href="{{ route('categories.show', $category->id) }}"><span class="badge rounded-pill post-category">{{ $category->title }}</span></a>
         @endforeach
       </div>
     </div>

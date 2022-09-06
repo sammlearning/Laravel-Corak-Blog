@@ -45,7 +45,8 @@ class HomeController extends Controller
         $featured_post = false;
       }
 
-      $posts = Post::with(['categories'])->orderBy('id', 'DESC')->get();
+      $posts = Post::orderBy('id', 'DESC')->paginate(7);
+      $posts->withPath('/home');
       $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
       $latest_posts = Post::orderByDesc('id')->limit(7)->get();
       return view('home', compact('posts', 'popular_posts', 'latest_posts', 'featured_post'));

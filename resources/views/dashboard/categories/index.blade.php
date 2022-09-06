@@ -29,7 +29,7 @@
               @foreach ($categories as $category)
                 <tr>
                   <td>{{ $category->id }}</td>
-                  <td><a class="profile-link" href="#"> {{ $category->title }} </a></td>
+                  <td><a class="profile-link" href="{{ route('categories.show', $category->id) }}" target="blank"> {{ $category->title }} <i class="bi bi-box-arrow-up-right ms-1"></i></a></td>
                   <td>{{ $category->description }}</td>
                   <td><span class="badge rounded-pill category-badge">{{ $category->posts_count }}</span></td>
                   <td>{{ $category->created_at }}</td>

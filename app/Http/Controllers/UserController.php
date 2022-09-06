@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -30,7 +31,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+      return redirect()->route('users.index');
     }
 
     /**
@@ -41,7 +42,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      return redirect()->route('users.index');
     }
 
     /**
@@ -52,7 +53,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+      $posts = User::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(7);
+      $posts->withPath('/users/'. $id);
+      $user = User::find($id);
+      $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
+      $latest_posts = Post::orderByDesc('id')->limit(7)->get();
+      return view('author', compact('user', 'posts', 'popular_posts', 'latest_posts'));
     }
 
     /**

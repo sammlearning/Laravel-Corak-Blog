@@ -30,7 +30,7 @@
               @foreach ($users as $user)
                 <tr>
                   <td>{{ $user->id }}</td>
-                  <td><img src="{{ asset($user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $user->name }}</td>
+                  <td><a href="{{ route('users.show', $user->id) }}" target="blank" class="profile-link"><img src="{{ asset($user->image->url) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $user->name }} <i class="bi bi-box-arrow-up-right ms-1"></i></a></td>
                   <td>{{ $user->email }}</td>
                   <td>{{ $user->posts_count }}</td>
                   <td>

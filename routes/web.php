@@ -49,3 +49,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('posts/{id}', [PostController::class, 'show'])->name('posts.show')->withoutMiddleware(['auth', 'admin']);
+Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show')->withoutMiddleware(['auth', 'admin']);
+Route::get('author/{id}', [UserController::class, 'show'])->name('users.show')->withoutMiddleware(['auth', 'admin']);

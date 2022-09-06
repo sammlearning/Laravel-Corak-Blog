@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -66,7 +67,12 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-      return redirect()->route('categories.index');
+      $posts = Category::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(7);
+      $posts->withPath('/categories/'. $id);
+      $category = Category::find($id);
+      $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
+      $latest_posts = Post::orderByDesc('id')->limit(7)->get();
+      return view('category', compact('category', 'posts', 'popular_posts', 'latest_posts'));
     }
 
     /**

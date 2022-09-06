@@ -57,7 +57,7 @@
                 <th>#</th>
                 <th>Post</th>
                 {{-- <th>Body</th> --}}
-                <th>Categories</th>
+                {{-- <th>Categories</th> --}}
                 <th>Comments</th>
                 <th>Created at</th>
                 <th>Actions</th>
@@ -73,26 +73,43 @@
                   </td>
                   <td>
                     <div class="post-info">
-                      <a href="{{ route('posts.show', $post->id) }}">
+                      <a href="{{ route('posts.show', $post->id) }}" target="blank">
                         <img src="{{ asset($post->image->url_sm) }}" class="post-thumbnail">
                       </a>
                       <div class="post-links">
-                        <h6><b><a class="profile-link" href="{{ route('posts.show', $post->id) }}">{{ $post->subject }}</a></b></h6>
-                        <a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url_sm) }}" class="rounded-circle user-profile-image" alt="Profile image"> {{ $post->user->name }}</a>
+                        <h7 class="mb-2">
+                          <b>
+                            <a class="profile-link" href="{{ route('posts.show', $post->id) }}" target="blank">
+                              {{ $post->subject }} <i class="bi bi-box-arrow-up-right ms-1"></i>
+                              @if ( $featured_post->post_id == $post->id )
+                                <span class="badge text-bg-light">Featured</span>
+                              @endif
+                            </a>
+                          </b>
+                        </h7>
+                        <div class="post-author mb-2">
+                          <span class="ms-1 me-1">Published by</span>
+                          <a class="profile-link" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url_sm) }}" class="rounded-circle user-profile-image me-1" width="20" alt="Profile image"> {{ $post->user->name }}</a>
+                        </div>
+                        <div class="post-categories">
+                          @foreach ($post->categories as $category)
+                            <a href="{{ route('categories.edit', $category->id) }}" class=""><span class="badge text-bg-light">{{$category->title}}</span></a>
+                          @endforeach
+                        </div>
                       </div>
                     </div>
                   </td>
                   {{-- <td>{{ $post->body }}</td> --}}
-                  <td>
+                  {{-- <td>
                     <div class="table-center-items">
                     @foreach ($post->categories as $category)
                       <a href="#" class="ms-1"><span class="badge rounded-pill category-badge">{{$category->title}}</span></a>
                     @endforeach
                   </div>
-                  </td>
+                  </td> --}}
                   <td>
                     <div class="table-center-items">
-                      <span class="badge rounded-pill category-badge">{{ $post->comments->Count() }}</span>
+                      <span class="">{{ $post->comments->Count() }}</span>
                     </div>
                   </td>
                   <td>
@@ -118,7 +135,7 @@
                 <th>#</th>
                 <th>Post</th>
                 {{-- <th>Body</th> --}}
-                <th>Categories</th>
+                {{-- <th>Categories</th> --}}
                 <th>Comments</th>
                 <th>Created at</th>
                 <th>Actions</th>
