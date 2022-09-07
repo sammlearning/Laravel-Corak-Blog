@@ -3,25 +3,7 @@
 @section('content')
   <div class="row">
     <div class="col-lg-8">
-      @if (session('search'))
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-          Your search for <b> {{ session('search') }} </b> did not return any results.
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      @endif
-      @if ($featured_post != false && $posts->currentPage() == 1)
-        <div class="featured-post" style="background-image: url('{{asset($featured_post->image->url)}}')">
-          <div class="post-info">
-            <h4 class="post-title">{{ $featured_post->subject }}</h4>
-            <span>Published at {{ $featured_post->created_at }} By <b>{{ $featured_post->user->name }}</b></span>
-            <div class="post-categories">
-              @foreach ($featured_post->categories as $category)
-                <a href="{{ route('categories.show', $category->id) }}"><span class="badge text-bg-light text-decoration-none">{{ $category->title }}</span></a>
-              @endforeach
-            </div>
-          </div>
-        </div>
-      @endif
+      <h5 class="mb-3">Search results for <b>{{ $search }}</b>, {{ $posts->total() }} {{ $posts->Count() > 1 ? 'posts' : 'post' }} found</h5>
       @foreach ($posts as $post)
         <div class="post" style="transform: rotate(0);">
           <img class="post-img image-loader" src="{{ asset($post->image->url_md) }}">
@@ -34,7 +16,7 @@
             <p class="post-short-description">{{ strip_tags($post->body) }}</p>
             <span class="post-categories">
               @foreach ($post->categories as $category)
-                <span class="badge text-bg-light text-decoration-none"> {{ $category->title }} </span>
+                <a class="badge text-bg-light text-decoration-none" href="{{ route('categories.show', $category->id) }}"> {{ $category->title }} </a>
               @endforeach
             </span>
             <a class="btn post-read-more stretched-link" href="{{route('posts.show', $post->id)}}">Read more <i class="bi bi-chevron-right"></i></a>

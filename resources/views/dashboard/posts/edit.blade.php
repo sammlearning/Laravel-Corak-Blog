@@ -16,7 +16,7 @@
           <div class="card-body profile-card-body">
             <img class="rounded-sqare post-image" src="{{ asset($post->image->url_md) }}" alt="">
             <ul>
-              <li><h5 class="user-name">{{ $post->subject }} <a href="{{ route('posts.show', $post->id) }}" target="blank"><i class="bi bi-box-arrow-up-right ms-1"></i></a></h5></li>
+              <li><h5 class="user-name">{{ $post->subject }} <a href="{{ route('posts.show', $post->id) }}" target="_blank"><i class="bi bi-box-arrow-up-right ms-1"></i></a></h5></li>
               <li>Author <a class="profile-link ms-1" href="{{ route('users.edit', $post->user->id) }}"><img src="{{ asset($post->user->image->url_sm) }}" class="rounded-circle user-profile-image me-0" alt="Profile image"> {{ $post->user->name }}</a></li>
               <li>Categories
                 @foreach ($post->categories as $category)

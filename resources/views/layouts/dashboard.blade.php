@@ -43,7 +43,7 @@
     <div class="col-md-2 p-0">
       <nav class="navbar navbar-dark navbar-expand-lg dashboard-sidebar">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{{ route('home') }}"><img src="{{ asset('images/header-logo-dark.png') }}" alt=""></a>
+          <a class="navbar-brand" href="{{ route('home') }}" target="_blank"><img src="{{ asset('images/header-logo-dark.png') }}" alt=""></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -51,19 +51,28 @@
             <ul class="dashboard-list">
               <h6 class="dashboard-list-title">Dashboard</h6>
               <li class="nav-item {{ Route::currentRouteName() == 'dashboard' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}"><span class="dashboard-list-icon"><i class="bi bi-pie-chart-fill"></i></span> Home</a>
+                <a class="nav-link" href="{{ route('dashboard') }}"><span class="dashboard-list-icon"><i class="bi bi-pie-chart-fill"></i></span> Analytics</a>
               </li>
-              <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
-                <a class="nav-link" href="#"><span class="dashboard-list-icon"><i class="bi bi-people-fill"></i></span> Link</a>
+            </ul>
+            <ul class="dashboard-list">
+              <h6 class="dashboard-list-title">Website</h6>
+              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-gear-fill"></i></span> Configuration</a>
+              </li>
+              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-ui-checks"></i></span> Navbar</a>
+              </li>
+              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-grid-1x2-fill"></i></span> Sidebar</a>
+              </li>
+              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-view-list"></i></span> Footer</a>
               </li>
             </ul>
             <ul class="dashboard-list">
               <h6 class="dashboard-list-title">Users</h6>
               <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-people-fill"></i></span> Manage Users</a>
-              </li>
-              <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
-                <a class="nav-link" href="#"><span class="dashboard-list-icon"><i class="bi bi-people-fill"></i></span> Link</a>
               </li>
             </ul>
             <ul class="dashboard-list">
@@ -86,7 +95,7 @@
             </ul>
             <ul class="dashboard-list">
               <li class="nav-item {{ Route::currentRouteName() == 'route' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('home') }}" target="blank"><span class="dashboard-list-icon"><i class="bi bi-box-arrow-up-right"></i></span> View Blog</a>
+                <a class="nav-link" href="{{ route('home') }}" target="_blank"><span class="dashboard-list-icon"><i class="bi bi-box-arrow-up-right"></i></span> View Blog</a>
               </li>
             </ul>
           </div>

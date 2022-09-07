@@ -3,7 +3,7 @@
 @section('content')
   <div class="row">
     <div class="col-lg-8">
-      <h5 class="mb-3">{{ $category->posts->count() }} published {{ $category->posts->count() > 1 ? 'posts' : 'post' }} in the <b>{{ $category->title }}</b> category</h5>
+      <h5 class="mb-3">{{ $posts->total() }} published {{ $posts->total() > 1 ? 'posts' : 'post' }} in the <b>{{ $category->title }}</b> category</h5>
       @foreach ($posts as $post)
         <div class="post" style="transform: rotate(0);">
           <img class="post-img image-loader" src="{{ asset($post->image->url_md) }}">

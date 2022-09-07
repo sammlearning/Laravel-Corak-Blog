@@ -11,6 +11,25 @@
     padding: 0;
     height: 100%;
     align-items: flex-start;
+    /* width */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: #bdc3c7;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: #95a5a6;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: #7f8c8d;
+    }
     .container-fluid {
       background-color: $secondary-color-alt;
       padding: 0;

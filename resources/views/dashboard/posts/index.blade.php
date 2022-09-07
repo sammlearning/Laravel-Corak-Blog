@@ -73,13 +73,13 @@
                   </td>
                   <td>
                     <div class="post-info">
-                      <a href="{{ route('posts.show', $post->id) }}" target="blank">
+                      <a href="{{ route('posts.show', $post->id) }}" target="_blank">
                         <img src="{{ asset($post->image->url_sm) }}" class="post-thumbnail">
                       </a>
                       <div class="post-links">
                         <h7 class="mb-2">
                           <b>
-                            <a class="profile-link" href="{{ route('posts.show', $post->id) }}" target="blank">
+                            <a class="profile-link" href="{{ route('posts.show', $post->id) }}" target="_blank">
                               {{ $post->subject }} <i class="bi bi-box-arrow-up-right ms-1"></i>
                               @if ( $featured_post->post_id == $post->id )
                                 <span class="badge text-bg-light">Featured</span>

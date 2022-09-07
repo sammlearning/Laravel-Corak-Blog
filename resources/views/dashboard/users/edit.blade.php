@@ -16,7 +16,7 @@
           <div class="card-body profile-card-body">
             <img class="rounded-circle profile-img" src="{{ asset($user->image->url) }}" alt="">
             <ul>
-              <li><h5 class="user-name">{{ $user->name }} <a href="{{ route('users.show', $user->id) }}" target="blank"><i class="bi bi-box-arrow-up-right ms-1"></i></a></h5></li>
+              <li><h5 class="user-name">{{ $user->name }} <a href="{{ route('users.show', $user->id) }}" target="_blank"><i class="bi bi-box-arrow-up-right ms-1"></i></a></h5></li>
               <li>Role <div class="badge bg-primary">{{ $user->is_admin == 1 ? 'Admin' : 'User' }}</div></li>
               <li>Published Posts <div class="badge bg-primary">{{ $user->posts->Count() }}</div></li>
               <li>Published Comments <div class="badge bg-primary">{{ $user->comments->Count() }}</div></li>

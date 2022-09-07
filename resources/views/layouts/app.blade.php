@@ -150,10 +150,10 @@
         </ul>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <form action="">
+            <form action="{{ route('posts.search') }}" method="GET">
               <div class="nav-search">
-                <i class="bi bi-search"></i>
-                <input type="search" name="" id="" placeholder="Search">
+                <i class="bi bi-search" type="submit"></i>
+                <input type="search" name="q" id="q" placeholder="Search" required>
               </div>
             </form>
           </li>

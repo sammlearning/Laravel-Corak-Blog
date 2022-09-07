@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,3 +52,4 @@ Route::middleware('auth')->group(function () {
 Route::get('posts/{id}', [PostController::class, 'show'])->name('posts.show')->withoutMiddleware(['auth', 'admin']);
 Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show')->withoutMiddleware(['auth', 'admin']);
 Route::get('author/{id}', [UserController::class, 'show'])->name('users.show')->withoutMiddleware(['auth', 'admin']);
+Route::get('search', [SearchController::class, 'index'])->name('posts.search');
