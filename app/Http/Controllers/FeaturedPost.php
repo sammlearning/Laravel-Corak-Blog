@@ -19,17 +19,10 @@ class FeaturedPost extends Controller
 
     $request->featured_status == 'on' ? $status = '1' : $status = '0';
 
-    if (DB::table('featured_post')->doesntExist()) {
-      DB::table('featured_post')->insert([
-        'status' => 0,
-        'post_id' => 0,
-      ]);
-    } else {
-      DB::table('featured_post')->update([
-        'status' => $status,
-        'post_id' => $post->id,
-      ]);
-    }
+    DB::table('featured_post')->update([
+      'status' => $status,
+      'post_id' => $post->id,
+    ]);
 
     return redirect()->route('posts.index')->with('success', 'Featured post updated successfully');
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FeaturedPost;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
@@ -37,6 +38,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     'dashboard/categories' => CategoryController::class,
     'dashboard/users' => UserController::class,
   ]);
+  Route::controller(ConfigController::class)->group(function () {
+      Route::get('dashboard/config', 'config_index')->name('config.index');
+      Route::post('dashboard/config', 'config_update')->name('config.update');
+      Route::post('dashboard/config/logo', 'logo')->name('config.logo');
+  });
   Route::put('dashboard/featured', [FeaturedPost::class, 'update'])->name('post.featured');
 });
 

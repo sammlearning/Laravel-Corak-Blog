@@ -7,7 +7,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ app('blog_title') }}</title>
+
+    <meta name="description" content="{{ app('blog_description') }}">
+
+    @if (Storage::disk('public')->exists('icon.png'))
+      <link rel="icon" type="image/png" href="{{ asset('storage/icon.png') }}">
+    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -103,7 +109,12 @@
   </nav>
   <section class="header">
     <div class="container">
-        <img class="header-logo" src="{{asset('images/header-logo.png')}}" alt="">
+      @if (Storage::disk('public')->exists('logo_light.png'))
+        <link rel="icon" type="image/png" href="{{ asset('storage/logo_light.png') }}">
+        <img class="header-logo" src="{{ asset('storage/logo_light.png') }}" alt="{{ app('blog_title') }} logo">
+        @else
+        <img class="header-logo" src="{{ asset('images/header-logo.png') }}" alt="{{ app('blog_title') }} logo">
+      @endif
     </div>
   </section>
   <nav class="navbar navbar-dark navbar-expand-lg navbar-center sticky-top">

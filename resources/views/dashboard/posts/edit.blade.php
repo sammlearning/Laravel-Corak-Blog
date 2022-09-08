@@ -97,11 +97,11 @@
                   <img src="" id="post-thumbnail" style="max-width: 100%">
                 </div>
                 <div class="uploaded-image-actions d-block mx-auto mt-2">
-                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleX"><i class="bi bi-arrow-left-right"></i></button>
                     <button type="button" class="btn btn-primary cropper-action" data-cropper="scaleY"><i class="bi bi-arrow-down-up"></i></button>
                   </div>
-                  <div class="btn-group" role="group" aria-label="Basic example">
+                  <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateRight"><i class="bi bi-arrow-clockwise"></i></button>
                     <button type="button" class="btn btn-primary cropper-action" data-cropper="rotateLeft"><i class="bi bi-arrow-counterclockwise"></i></button>
                   </div>

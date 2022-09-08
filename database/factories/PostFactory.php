@@ -2,12 +2,13 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Post>
  */
-class ImageFactory extends Factory
+class PostFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,10 +18,8 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-          'rid' => 'profile',
-          'url' => 'images/profile.png',
-          'url_md' => 'images/profile.png',
-          'url_sm' => 'images/profile.png',
+          'subject' => fake()->sentence(4),
+          'body' => fake()->text(200),
         ];
     }
 }

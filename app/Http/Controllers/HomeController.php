@@ -27,13 +27,6 @@ class HomeController extends Controller
     public function index()
     {
 
-      if (DB::table('featured_post')->doesntExist()) {
-        DB::table('featured_post')->insert([
-          'status' => 0,
-          'post_id' => 0,
-        ]);
-      }
-
       $post = DB::table('featured_post')->first();
 
       if ($post->status != 0) {

@@ -7,7 +7,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} | Dashboard</title>
+    <title>{{ app('blog_title') }} | Dashboard</title>
+
+    <meta name="description" content="{{ app('blog_description') }}">
+
+    @if (Storage::disk('public')->exists('icon.png'))
+      <link rel="icon" type="image/png" href="{{ asset('storage/icon.png') }}">
+    @endif
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -43,7 +49,14 @@
     <div class="col-md-2 p-0">
       <nav class="navbar navbar-dark navbar-expand-lg dashboard-sidebar">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{{ route('home') }}" target="_blank"><img src="{{ asset('images/header-logo-dark.png') }}" alt=""></a>
+          <a class="navbar-brand" href="{{ route('home') }}" target="_blank">
+            @if (Storage::disk('public')->exists('logo_dark.png'))
+              <link rel="icon" type="image/png" href="{{ asset('storage/logo_dark.png') }}">
+              <img class="header-logo" src="{{ asset('storage/logo_dark.png') }}" alt="{{ app('blog_title') }} logo">
+            @else
+              <img src="{{ asset('images/header-logo-dark.png') }}" alt="{{ app('blog_title') }} logo">
+            @endif
+          </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -55,9 +68,9 @@
               </li>
             </ul>
             <ul class="dashboard-list">
-              <h6 class="dashboard-list-title">Website</h6>
-              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-gear-fill"></i></span> Configuration</a>
+              <h6 class="dashboard-list-title">Blog</h6>
+              <li class="nav-item {{ Route::currentRouteName() == 'config.index' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('config.index') }}"><span class="dashboard-list-icon"><i class="bi bi-gear-fill"></i></span> Configuration</a>
               </li>
               <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-ui-checks"></i></span> Navbar</a>

@@ -24,13 +24,6 @@ class PostController extends Controller
       $posts = Post::with(['categories'])->get();
       $categories = Category::get();
 
-      if (DB::table('featured_post')->doesntExist()) {
-        DB::table('featured_post')->insert([
-          'status' => 0,
-          'post_id' => 0,
-        ]);
-      }
-
       $featured_post = DB::table('featured_post')->first();
 
       if ($posts->isEmpty()) {
