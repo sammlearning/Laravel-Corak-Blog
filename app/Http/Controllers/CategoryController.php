@@ -70,6 +70,9 @@ class CategoryController extends Controller
       $posts = Category::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(7);
       $posts->withPath('/categories/'. $id);
       $category = Category::find($id);
+      if ($posts->isEmpty()) {
+        return redirect()->route('home')->with('category', $category->title);
+      }
       $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
       $latest_posts = Post::orderByDesc('id')->limit(7)->get();
       return view('category', compact('category', 'posts', 'popular_posts', 'latest_posts'));

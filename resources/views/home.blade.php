@@ -9,6 +9,12 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       @endif
+      @if (session('category'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          The <b> {{ session('category') }} </b> category is empty.
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      @endif
       @if ($featured_post != false && $posts->currentPage() == 1)
         <div class="featured-post" style="background-image: url('{{asset($featured_post->image->url)}}')">
           <div class="post-info">

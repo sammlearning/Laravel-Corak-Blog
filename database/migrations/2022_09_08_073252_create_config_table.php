@@ -19,6 +19,12 @@ return new class extends Migration
         $table->string('blog_description');
         $table->boolean('allow_comments');
         $table->boolean('allow_register');
+        $table->boolean('allow_search');
+        $table->boolean('fixed_navbar');
+        $table->string('facebook')->nullable();
+        $table->string('instagram')->nullable();
+        $table->string('youtube')->nullable();
+        $table->string('twitter')->nullable();
       });
 
       DB::table('config')->insert([
@@ -26,6 +32,8 @@ return new class extends Migration
         'blog_description' => 'Blog description',
         'allow_comments' => 1,
         'allow_register' => 1,
+        'allow_search' => 1,
+        'fixed_navbar' => 1,
       ]);
 
     }

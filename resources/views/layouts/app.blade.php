@@ -7,9 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ app('blog_title') }}</title>
+    <title>{{ config('app.title') }}</title>
 
-    <meta name="description" content="{{ app('blog_description') }}">
+    <meta name="description" content="{{ config('app.description') }}">
 
     @if (Storage::disk('public')->exists('icon.png'))
       <link rel="icon" type="image/png" href="{{ asset('storage/icon.png') }}">
@@ -45,18 +45,13 @@
       <div class="collapse navbar-collapse" id="navtop">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <div class="navtop-social-links">
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="bi bi-facebook"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="bi bi-instagram"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="bi bi-youtube"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="bi bi-twitter"></i></a>
-            </li>
+            @foreach (config('app.sociallinks') as $link)
+              @if (config('app.'.$link) != null)
+                <li class="nav-item">
+                  <a class="nav-link" href="{{ config('app.'.$link) }}" target="_blank" rel="nofollow"><i class="bi bi-{{ $link }}"></i></a>
+                </li>
+              @endif
+            @endforeach
           </div>
           <li class="nav-item">
             <a class="nav-link" href="#">About us</a>
@@ -111,13 +106,13 @@
     <div class="container">
       @if (Storage::disk('public')->exists('logo_light.png'))
         <link rel="icon" type="image/png" href="{{ asset('storage/logo_light.png') }}">
-        <img class="header-logo" src="{{ asset('storage/logo_light.png') }}" alt="{{ app('blog_title') }} logo">
+        <img class="header-logo" src="{{ asset('storage/logo_light.png') }}" alt="{{ config('app.title') }} logo">
         @else
-        <img class="header-logo" src="{{ asset('images/header-logo.png') }}" alt="{{ app('blog_title') }} logo">
+        <img class="header-logo" src="{{ asset('images/header-logo.png') }}" alt="{{ config('app.title') }} logo">
       @endif
     </div>
   </section>
-  <nav class="navbar navbar-dark navbar-expand-lg navbar-center sticky-top">
+  <nav class="navbar navbar-dark navbar-expand-lg navbar-center {{ config('app.navbar.fixed') == TRUE ? 'sticky-top' : '' }}">
     <div class="container">
       <button class="navbar-toggler navbar-center-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-center" aria-controls="navbar-center" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -126,49 +121,42 @@
         <li class="nav-item">
           <a class="nav-link" href="{{route('home')}}"><i class="bi bi-house-door-fill me-1"></i> Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Gaming</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Technology</a>
-        </li>
       </ul>
       <div class="collapse navbar-collapse" id="navbar-center">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Global news</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Categories
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Programming</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Tutorials</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Play lists</a>
-          </li>
+          @foreach (config('app.navbar.links') as $link)
+            @if ($link->type == 'dropdown')
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ $link->title }}</a>
+                <ul class="dropdown-menu">
+                  @if ($link->links->isNotEmpty())
+                    @foreach ($link->links as $link)
+                      <li><a class="dropdown-item" @if($link->type == 'url') href="{{ $link->url }}" target="_blank" @elseif($link->type == 'category') href="{{ route('categories.show', $link->category_id) }}" @endif>{{ $link->title }}</a></li>
+                    @endforeach
+                  @else
+                    <p class="px-3 m-0">Empty</p>
+                  @endif
+                </ul>
+              </li>
+            @elseif ($link->link_id == NULL)
+              <li class="nav-item">
+                <a class="nav-link" @if($link->type == 'url') href="{{ $link->url }}" target="_blank" @elseif($link->type == 'category') href="{{ route('categories.show', $link->category_id) }}" @endif>{{ $link->title }}</a>
+              </li>
+            @endif
+          @endforeach
         </ul>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <form action="{{ route('posts.search') }}" method="GET">
-              <div class="nav-search">
-                <i class="bi bi-search" type="submit"></i>
-                <input type="search" name="q" id="q" placeholder="Search" required>
-              </div>
-            </form>
-          </li>
-        </ul>
+        @if (config('app.search') == TRUE)
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <form action="{{ route('posts.search') }}" method="GET">
+                <div class="nav-search">
+                  <button class="search-btn" type="submit"><i class="bi bi-search"></i></button>
+                  <input type="search" name="q" id="q" placeholder="Search" required>
+                </div>
+              </form>
+            </li>
+          </ul>
+        @endif
       </div>
     </div>
   </nav>
@@ -185,7 +173,13 @@
             <h4 class="footer-list-title">World of technology</h4>
             <ul>
               <li><p>Sed dapibus ipsum eu ante dapibus volutpat, Ut vestibulum risus id urna molestie scelerisque.</p></li>
-              <li><a class="pe-1" href="#"><i class="bi bi-facebook"></i></a> <a class="pe-1" href="#"><i class="bi bi-instagram"></i></a> <a class="pe-1" href="#"><i class="bi bi-twitter"></i></a> <a class="pe-1" href="#"><i class="bi bi-youtube"></i></a></li>
+              <li>
+                @foreach (config('app.sociallinks') as $link)
+                  @if (config('app.'.$link) != null)
+                    <a class="pe-1" href="{{ config('app.'.$link) }}" target="_blank" rel="nofollow"><i class="bi bi-{{ $link }}"></i></a>
+                  @endif
+                @endforeach
+              </li>
             </ul>
           </div>
         </div>

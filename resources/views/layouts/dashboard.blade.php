@@ -7,9 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ app('blog_title') }} | Dashboard</title>
+    <title>{{ config('app.title') }} | Dashboard</title>
 
-    <meta name="description" content="{{ app('blog_description') }}">
+    <meta name="description" content="{{ config('app.description') }}">
 
     @if (Storage::disk('public')->exists('icon.png'))
       <link rel="icon" type="image/png" href="{{ asset('storage/icon.png') }}">
@@ -52,9 +52,9 @@
           <a class="navbar-brand" href="{{ route('home') }}" target="_blank">
             @if (Storage::disk('public')->exists('logo_dark.png'))
               <link rel="icon" type="image/png" href="{{ asset('storage/logo_dark.png') }}">
-              <img class="header-logo" src="{{ asset('storage/logo_dark.png') }}" alt="{{ app('blog_title') }} logo">
+              <img class="header-logo" src="{{ asset('storage/logo_dark.png') }}" alt="{{ config('app.title') }} logo">
             @else
-              <img src="{{ asset('images/header-logo-dark.png') }}" alt="{{ app('blog_title') }} logo">
+              <img src="{{ asset('images/header-logo-dark.png') }}" alt="{{ config('app.title') }} logo">
             @endif
           </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -68,16 +68,16 @@
               </li>
             </ul>
             <ul class="dashboard-list">
-              <h6 class="dashboard-list-title">Blog</h6>
+              <h6 class="dashboard-list-title">Configuration</h6>
               <li class="nav-item {{ Route::currentRouteName() == 'config.index' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('config.index') }}"><span class="dashboard-list-icon"><i class="bi bi-gear-fill"></i></span> Configuration</a>
+                <a class="nav-link" href="{{ route('config.index') }}"><span class="dashboard-list-icon"><i class="bi bi-gear-fill"></i></span> Blog</a>
               </li>
-              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-ui-checks"></i></span> Navbar</a>
+              <li class="nav-item {{ Route::currentRouteName() == 'config.navbar' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('config.navbar') }}"><span class="dashboard-list-icon"><i class="bi bi-ui-checks"></i></span> Navbar</a>
               </li>
-              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
+              {{-- <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-grid-1x2-fill"></i></span> Sidebar</a>
-              </li>
+              </li> --}}
               <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-view-list"></i></span> Footer</a>
               </li>

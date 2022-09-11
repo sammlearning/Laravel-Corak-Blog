@@ -6,6 +6,7 @@ use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\FeaturedPost;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
+use App\Http\Controllers\LinkController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
@@ -37,11 +38,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
     'dashboard/posts' => PostController::class,
     'dashboard/categories' => CategoryController::class,
     'dashboard/users' => UserController::class,
+    'dashboard/config/link' => LinkController::class,
   ]);
   Route::controller(ConfigController::class)->group(function () {
       Route::get('dashboard/config', 'config_index')->name('config.index');
       Route::post('dashboard/config', 'config_update')->name('config.update');
       Route::post('dashboard/config/logo', 'logo')->name('config.logo');
+      Route::get('dashboard/config/navbar', 'navbar_index')->name('config.navbar');
+      Route::post('dashboard/config/navbar', 'navbar_update')->name('config.navbar.update');
   });
   Route::put('dashboard/featured', [FeaturedPost::class, 'update'])->name('post.featured');
 });

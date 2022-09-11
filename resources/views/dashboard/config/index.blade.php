@@ -15,7 +15,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
       @enderror
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <div class="alert alert-warning alert-dismissible fade show shadow-sm" role="alert">
         After uploading a new blog icon or logo, it may take some time to appear due to caching.
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
@@ -62,7 +62,7 @@
     <div class="col-md-4 dashboard-col">
       <div class="dashboard-card profile-page h-auto">
         <div class="card-header">
-          <h5 class="profile-page-title">Change logo (light mode)</h5>
+          <h5 class="profile-page-title">Change logo <span class="badge bg-secondary">Light</span></h5>
         </div>
         <div class="card-body">
           <form action="{{ route('config.logo') }}" method="POST" id="logoLightForm">
@@ -101,7 +101,7 @@
     <div class="col-md-4 dashboard-col">
       <div class="dashboard-card profile-page h-auto">
         <div class="card-header">
-          <h5 class="profile-page-title">Change logo (Dark mode)</h5>
+          <h5 class="profile-page-title">Change logo <span class="badge bg-secondary">Dark</span></h5>
         </div>
         <div class="card-body">
           <form action="{{ route('config.logo') }}" method="POST" id="logoDarkForm">
@@ -164,17 +164,61 @@
               @enderror
             </div>
             <div class="mb-3">
+              <label for="facebook" class="form-label"><i class="bi bi-facebook"></i> Facebook</label>
+              <input type="url" class="form-control @error('facebook') is-invalid @enderror" id="facebook" name="facebook" value="{{ $errors->any() ? old('facebook') : config('app.facebook') }}" placeholder="Facebook url">
+              @error('facebook')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @else
+                <div id="facebookHelp" class="form-text">Leave it blank if you do not want the Facebook link to appear in navbar and footer.</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label for="instagram" class="form-label"><i class="bi bi-instagram"></i> Instagram</label>
+              <input type="url" class="form-control @error('instagram') is-invalid @enderror" id="instagram" name="instagram" value="{{ $errors->any() ? old('instagram') : config('app.instagram') }}" placeholder="Instagram url">
+              @error('instagram')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @else
+                <div id="instagramHelp" class="form-text">Leave it blank if you do not want the Instagram link to appear in navbar and footer.</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label for="youtube" class="form-label"><i class="bi bi-youtube"></i> Youtube</label>
+              <input type="url" class="form-control @error('youtube') is-invalid @enderror" id="youtube" name="youtube" value="{{ $errors->any() ? old('youtube') : config('app.youtube') }}" placeholder="Youtube url">
+              @error('youtube')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @else
+                <div id="youtubeHelp" class="form-text">Leave it blank if you do not want the Youtube link to appear in navbar and footer.</div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <label for="twitter" class="form-label"><i class="bi bi-twitter"></i> Twitter</label>
+              <input type="url" class="form-control @error('twitter') is-invalid @enderror" id="twitter" name="twitter" value="{{ $errors->any() ? old('twitter') : config('app.twitter') }}" placeholder="Twitter url">
+              @error('twitter')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+              @else
+                <div id="twitterHelp" class="form-text">Leave it blank if you do not want the Twitter link to appear in navbar and footer.</div>
+              @enderror
+            </div>
+            <div class="mb-3">
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="comments" name="comments" {{ $config->allow_comments == 1 ? 'checked' : '' }}>
                 <label class="form-check-label" for="comments"><i class="bi bi-chat-dots-fill text-muted"></i> Allow comments</label>
               </div>
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
               <div class="form-check form-switch">
                 <input class="form-check-input" type="checkbox" role="switch" id="auth" name="auth" {{ $config->allow_register == 1 ? 'checked' : '' }}>
                 <label class="form-check-label" for="auth"><i class="bi bi-people-fill text-muted"></i> Allow registration</label>
               </div>
-            </div>
+            </div> --}}
             <button type="submit" class="btn btn-primary">Update</button>
           </form>
         </div>

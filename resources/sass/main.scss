@@ -80,7 +80,7 @@ main{
       background: $primary-color;
       color: #ffffff;
       padding: 0px 10px;
-      border-bottom: 1px solid #ffffff;
+      // border-bottom: 1px solid #ffffff;
     }
     i:hover {
       cursor: pointer;
@@ -97,6 +97,13 @@ main{
     }
     input::placeholder {
       color: #ffffff;
+    }
+    .search-btn {
+      background: transparent;
+      border: 0;
+      padding: 1px 0;
+      border-bottom: 1px solid #ffffff;
+      line-height: 30px;
     }
   }
 }
