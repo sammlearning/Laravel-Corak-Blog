@@ -16,9 +16,9 @@
         </div>
       @endif
       @if ($featured_post != false && $posts->currentPage() == 1)
-        <div class="featured-post" style="background-image: url('{{asset($featured_post->image->url)}}')">
+        <div class="featured-post" style="transform: rotate(0); background-image: url('{{asset($featured_post->image->url)}}')">
           <div class="post-info">
-            <h4 class="post-title">{{ $featured_post->subject }}</h4>
+            <a href="{{ route('posts.show', $featured_post->id) }}" class="stretched-link featured-post-link"><h4 class="post-title">{{ $featured_post->subject }}</h4></a>
             <span>Published at {{ $featured_post->created_at }} By <b>{{ $featured_post->user->name }}</b></span>
             <div class="post-categories">
               @foreach ($featured_post->categories as $category)

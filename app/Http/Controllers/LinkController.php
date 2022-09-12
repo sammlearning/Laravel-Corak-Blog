@@ -62,14 +62,19 @@ class LinkController extends Controller
 
       $request->parent == 0 ? $parent = NULL : $parent = $request->parent;
 
+      $position = $request->position;
+
       if ($parent == NULL) {
-        $links = Link::where('link_id', NULL)->where('position', 'navbar')->count();
+        if ($position == 'navbar') {
+          $links = Link::where('link_id', NULL)->where('position', 'navbar')->count();
+        } elseif ($position == 'navtop') {
+          $links = Link::where('link_id', NULL)->where('position', 'navtop')->count();
+        }
         if ($links >= 8) {
           return redirect()->route('config.navbar')->with('error', 'Cannot create more parents now, You can add subsidiary links');
         }
       }
 
-      $position = $request->position;
 
       if ($parent != NULL) {
         $link = Link::findOrFail($parent);

@@ -52,8 +52,8 @@
               <div class="col-md-6">
                 <label for="position" class="form-label">Position</label>
                 <select class="form-control @error('position') is-invalid @enderror" name="position" id="position" required>
-                  <option value="navtop">Top Navbar</option>
-                  <option value="navbar" selected>Center Navbar</option>
+                  <option value="navtop" @if($link->position == 'navtop') selected @endif>Top Navbar</option>
+                  <option value="navbar" @if($link->position == 'navbar') selected @endif>Center Navbar</option>
                   @if ($link->type != 'dropdown')
                     <option value="footer">Footer</option>
                   @endif

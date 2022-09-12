@@ -28,7 +28,8 @@ class BlogConfigServiceProvider extends ServiceProvider
     {
       if (Schema::hasTable('config')) {
         $config = DB::table('config')->first();
-        $links = Link::where('position', 'navbar')->get();
+        $links_top = Link::where('position', 'navtop')->get();
+        $links_center = Link::where('position', 'navbar')->get();
         config([
           'app.title' => $config->blog_title,
           'app.description' => $config->blog_description,
@@ -40,7 +41,8 @@ class BlogConfigServiceProvider extends ServiceProvider
           'app.comments' => $config->allow_comments,
           'app.search' => $config->allow_search,
           'app.navbar.fixed' => $config->fixed_navbar,
-          'app.navbar.links' => $links,
+          'app.navbar.links.center' => $links_center,
+          'app.navbar.links.top' => $links_top,
         ]);
       }
     }

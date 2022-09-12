@@ -53,12 +53,26 @@
               @endif
             @endforeach
           </div>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact us</a>
-          </li>
+          @foreach (config('app.navbar.links.top') as $link)
+            @if ($link->type == 'dropdown')
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ $link->title }}</a>
+                <ul class="dropdown-menu">
+                  @if ($link->links->isNotEmpty())
+                    @foreach ($link->links as $link)
+                      <li><a class="dropdown-item" @if($link->type == 'url') href="{{ $link->url }}" target="_blank" @elseif($link->type == 'category') href="{{ route('categories.show', $link->category_id) }}" @endif>{{ $link->title }}</a></li>
+                    @endforeach
+                  @else
+                    <p class="px-3 m-0">Empty</p>
+                  @endif
+                </ul>
+              </li>
+            @elseif ($link->link_id == NULL)
+              <li class="nav-item">
+                <a class="nav-link" @if($link->type == 'url') href="{{ $link->url }}" target="_blank" @elseif($link->type == 'category') href="{{ route('categories.show', $link->category_id) }}" @endif>{{ $link->title }}</a>
+              </li>
+            @endif
+          @endforeach
         </ul>
       </div>
       <ul class="navbar-nav static-navtop-list">
@@ -124,7 +138,7 @@
       </ul>
       <div class="collapse navbar-collapse" id="navbar-center">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          @foreach (config('app.navbar.links') as $link)
+          @foreach (config('app.navbar.links.center') as $link)
             @if ($link->type == 'dropdown')
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ $link->title }}</a>

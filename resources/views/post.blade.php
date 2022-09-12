@@ -37,7 +37,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     @enderror
-    @if (app('allow_comments') == 1)
+    @if (config('app.comments') == 1)
       <section class="post-page-comments">
         <div class="comments">
           <div class="post-page-comments-title">

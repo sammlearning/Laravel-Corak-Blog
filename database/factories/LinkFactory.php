@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Link>
  */
-class ImageFactory extends Factory
+class LinkFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,10 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-          //
+          'title' => fake()->sentence(1),
+          'link_id' => NULL,
+          'type' => 'category',
+          'url' => NULL,
         ];
     }
 }

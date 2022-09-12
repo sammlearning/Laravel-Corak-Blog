@@ -146,7 +146,68 @@
     <div class="col-md-12 dashboard-col">
       <div class="dashboard-card">
         <div class="card-header">
-          <h5 class="card-header-title">Navbar links</h5>
+          <h5 class="card-header-title">Navbar links <span class="badge bg-secondary">Top</span></h5>
+        </div>
+        <div class="card-body">
+          <table id="topLinksTable" class="table table-striped" style="width:100%">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Link</th>
+                <th>Parent</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($links_top as $link)
+                <tr>
+                  <td>{{ $link->id }}</td>
+                  <td>{{ $link->title }}</td>
+                  <td>
+                    @if ($link->link_id != NULL)
+                      <span>{{ $link->parent->title }}</span>
+                    @else
+                      <span class="text-muted">None</span>
+                    @endif
+                  </td>
+                  <td>@if ($link->type == 'url') URL @elseif ($link->type == 'category') Category @else Dropdown @endif</td>
+                  <td>
+                    @if ($link->type != 'dropdown')
+                      <a class="profile-link d-flex" @if ($link->type == 'url') href="{{ $link->url }}" @elseif ($link->type == 'category') href="{{ route('categories.show', $link->category) }}" @endif target="_blank"> <p class="link-url"> @if ($link->type == 'url') {{ $link->url }} @elseif ($link->type == 'category') {{ $link->category->title }} Category @endif </p> <i class="bi bi-box-arrow-up-right ms-1"></i></a>
+                    @else
+                      <span class="text-muted">None</span>
+                    @endif
+                  <td>
+                    <form action="{{ route('link.destroy', $link->id) }}" method="POST">
+                      @method('DELETE')
+                      @csrf
+                      <a class="btn btn-sm btn-light me-2" href="{{ route('link.edit', $link->id) }}"><i class="bi bi-pencil-square me-1"></i> Edit</a>
+                      <button class="btn btn-sm btn-light" type="submit"><i class="bi bi-trash3 me-1"></i> Delete</button>
+                    </form>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Link</th>
+                <th>Parent</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Actions</th>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 dashboard-col">
+      <div class="dashboard-card">
+        <div class="card-header">
+          <h5 class="card-header-title">Navbar links <span class="badge bg-secondary">Center</span></h5>
         </div>
         <div class="card-body">
           <table id="centerLinksTable" class="table table-striped" style="width:100%">
@@ -161,7 +222,7 @@
               </tr>
             </thead>
             <tbody>
-              @foreach($links as $link)
+              @foreach($links_center as $link)
                 <tr>
                   <td>{{ $link->id }}</td>
                   <td>{{ $link->title }}</td>
@@ -173,7 +234,6 @@
                     @endif
                   </td>
                   <td>@if ($link->type == 'url') URL @elseif ($link->type == 'category') Category @else Dropdown @endif</td>
-                  {{-- <td><span class="badge rounded-pill category-badge">aaa</span></td> --}}
                   <td>
                     @if ($link->type != 'dropdown')
                       <a class="profile-link d-flex" @if ($link->type == 'url') href="{{ $link->url }}" @elseif ($link->type == 'category') href="{{ route('categories.show', $link->category) }}" @endif target="_blank"> <p class="link-url"> @if ($link->type == 'url') {{ $link->url }} @elseif ($link->type == 'category') {{ $link->category->title }} Category @endif </p> <i class="bi bi-box-arrow-up-right ms-1"></i></a>
@@ -211,6 +271,7 @@
 @section('scripts')
   <script>
     $(document).ready(function () {
+      $('#topLinksTable').DataTable();
       $('#centerLinksTable').DataTable();
 
       let linkType = $('#type'), linkParent = $('#parent'), linkPosition = $('#position');

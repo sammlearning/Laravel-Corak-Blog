@@ -75,9 +75,12 @@ class ConfigController extends Controller
 
   public function navbar_index () {
     $categories = Category::get();
-    $links = Link::where('position', 'navbar')->get();
+    $links = Link::where('link_id', NULL)->get();
+    $links_top = Link::where('position', 'navtop')->get();
+    $links_center = Link::where('position', 'navbar')->get();
     $navbar_parents = Link::where('position', 'navbar')->where('link_id', NULL)->count();
-    return view('dashboard.config.navbar', compact('categories', 'links', 'navbar_parents'));
+    $navtop_parents = Link::where('position', 'navtop')->where('link_id', NULL)->count();
+    return view('dashboard.config.navbar', compact('categories', 'links', 'links_top', 'links_center', 'navbar_parents', 'navtop_parents'));
   }
 
   public function navbar_update (Request $request) {
