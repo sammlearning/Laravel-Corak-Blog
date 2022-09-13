@@ -55,7 +55,7 @@
                   <option value="navtop" @if($link->position == 'navtop') selected @endif>Top Navbar</option>
                   <option value="navbar" @if($link->position == 'navbar') selected @endif>Center Navbar</option>
                   @if ($link->type != 'dropdown')
-                    <option value="footer">Footer</option>
+                    <option value="footer" @if($link->position == 'footer') selected @endif>Footer</option>
                   @endif
                 </select>
                 @error('position')

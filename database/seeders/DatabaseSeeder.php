@@ -28,6 +28,8 @@ class DatabaseSeeder extends Seeder
         Link::factory(8, ['position' => 'navbar'])->for(Category::all()->random())->create();
 
         DB::table('config')->update([
+          'blog_title' => 'World Of Technology',
+          'blog_description' => fake()->sentence(15),
           'facebook' => '#',
           'instagram' => '#',
           'youtube' => '#',

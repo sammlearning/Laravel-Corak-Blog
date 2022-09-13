@@ -30,6 +30,8 @@ class BlogConfigServiceProvider extends ServiceProvider
         $config = DB::table('config')->first();
         $links_top = Link::where('position', 'navtop')->get();
         $links_center = Link::where('position', 'navbar')->get();
+        $list01 = Link::where('position', 'footer')->where('parent_list', 1)->get();
+        $list02 = Link::where('position', 'footer')->where('parent_list', 2)->get();
         config([
           'app.title' => $config->blog_title,
           'app.description' => $config->blog_description,
@@ -43,6 +45,11 @@ class BlogConfigServiceProvider extends ServiceProvider
           'app.navbar.fixed' => $config->fixed_navbar,
           'app.navbar.links.center' => $links_center,
           'app.navbar.links.top' => $links_top,
+          'app.featured.post' => $config->featured_post,
+          'app.footer.list01' => $list01,
+          'app.footer.list02' => $list02,
+          'app.footer.title01' => $config->footer01,
+          'app.footer.title02' => $config->footer02,
         ]);
       }
     }

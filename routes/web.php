@@ -41,11 +41,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     'dashboard/config/link' => LinkController::class,
   ]);
   Route::controller(ConfigController::class)->group(function () {
-      Route::get('dashboard/config', 'config_index')->name('config.index');
-      Route::post('dashboard/config', 'config_update')->name('config.update');
-      Route::post('dashboard/config/logo', 'logo')->name('config.logo');
-      Route::get('dashboard/config/navbar', 'navbar_index')->name('config.navbar');
-      Route::post('dashboard/config/navbar', 'navbar_update')->name('config.navbar.update');
+    Route::get('dashboard/config', 'config_index')->name('config.index');
+    Route::post('dashboard/config', 'config_update')->name('config.update');
+    Route::post('dashboard/config/logo', 'logo')->name('config.logo');
+    Route::get('dashboard/config/navbar', 'navbar_index')->name('config.navbar');
+    Route::post('dashboard/config/navbar', 'navbar_update')->name('config.navbar.update');
+    Route::get('dashboard/config/footer', 'footer_index')->name('config.footer');
+    Route::put('dashboard/config/footer', 'footer_update')->name('config.update');
   });
   Route::put('dashboard/featured', [FeaturedPost::class, 'update'])->name('post.featured');
 });

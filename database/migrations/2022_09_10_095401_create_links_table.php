@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('type');
+            $table->boolean('parent_list')->nullable();
             $table->foreignId('link_id')->nullable()->constrained('links')->cascadeOnDelete();
             $table->string('position');
             $table->string('url')->nullable();

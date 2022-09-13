@@ -12,6 +12,7 @@ class Link extends Model
   protected $fillable = [
     'title',
     'link_id',
+    'parent_list',
     'position',
     'type',
     'url',

@@ -19,40 +19,27 @@
     <div class="col-md-12 dashboard-col">
       <div class="dashboard-card">
         <div class="card-header">
-          <h5 class="card-header-title">Navbar options</h5>
+          <h5 class="card-header-title">Footer lists</h5>
         </div>
         <div class="card-body">
-          <form action="{{ route('config.navbar.update') }}" method="POST">
+          <form action="{{ route('config.footer') }}" method="POST">
             @csrf
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="navbar_search" name="navbar_search" {{ config('app.search') == TRUE ? 'checked' : '' }}>
-              <label class="form-check-label" for="navbar_search">Allow searching</label>
-            </div>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="navbar_scroll" name="navbar_scroll" {{ config('app.navbar.fixed') == TRUE ? 'checked' : '' }}>
-              <label class="form-check-label" for="navbar_scroll">Fixed navigation bar with scroll</label>
+            @method('PUT')
+            <div class="row mb-2">
+              <div class="col-md-6">
+                <label for="list01">List title</label>
+                <input type="text" class="form-control" id='list01' name="list01" placeholder="List title" value="{{ config('app.footer.title01') }}" required>
+              </div>
+              <div class="col-md-6">
+                <label for="list02">List title</label>
+                <input type="text" class="form-control" id='list02' name="list02" placeholder="List title" value="{{ config('app.footer.title02') }}" required>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary mt-2">Update</button>
           </form>
         </div>
       </div>
     </div>
-    @if (session('error'))
-      <div class="col-12">
-        <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-          {{ session('error') }}
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      </div>
-    @endif
-    @if ($navbar_parents >= 8)
-      <div class="col-12">
-        <div class="alert alert-warning alert-dismissible fade show mt-3 shadow-sm" role="alert">
-          For design reasons, the maximum number of parents that can be added to the navbar is 8 parents.
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      </div>
-    @endif
     <div class="col-md-12 dashboard-col">
       <div class="dashboard-card">
         <div class="card-header">
@@ -72,41 +59,10 @@
                 @enderror
               </div>
               <div class="col-md-6">
-                <label for="parent" class="form-label">Parent dropdown</label>
-                <select class="form-control @error('parent') is-invalid @enderror" name="parent" id="parent" required>
-                  <option value="0" selected>None</option>
-                  @foreach ($links as $link)
-                    @if ($link->type == 'dropdown')
-                      <option value="{{ $link->id }}">{{ $link->title }}</option>
-                    @endif
-                  @endforeach
-                </select>
-                @error('parent')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-            </div>
-            <div class="row mb-3">
-              <div class="col-md-6">
-                <label for="position" class="form-label">Position</label>
-                <select class="form-control @error('position') is-invalid @enderror" name="position" id="position" required>
-                  <option value="navtop">Top Navbar</option>
-                  <option value="navbar" selected>Center Navbar</option>
-                </select>
-                @error('position')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
-              <div class="col-md-6">
                 <label for="type" class="form-label">Type</label>
                 <select class="form-control @error('type') is-invalid @enderror" name="type" id="type" required>
                   <option value="url" @error('url') selected @enderror>URL</option>
                   <option value="category" @error('category') selected @enderror>Category</option>
-                  <option value="dropdown">Dropdown</option>
                 </select>
                 @error('type')
                   <span class="invalid-feedback" role="alert">
@@ -115,27 +71,41 @@
                 @enderror
               </div>
             </div>
-            <div class="mb-3 @error('url') @else d-none @enderror" id="linkURL">
-              <label for="url" class="form-label">URL</label>
-              <input type="url" class="form-control @error('url') is-invalid @enderror" id="url" name="url" value="{{ $errors->any() ? old('url') : '' }}" placeholder="URL">
-              @error('url')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
-            </div>
-            <div class="mb-3 @error('category') @else d-none @enderror" id="linkCategory">
-              <label for="category" class="form-label">Category</label>
-              <select class="form-control @error('category') is-invalid @enderror" name="category" id="category">
-                @foreach ($categories as $category)
-                  <option value="{{ $category->id }}">{{ $category->title }}</option>
-                @endforeach
-              </select>
-              @error('category')
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-                </span>
-              @enderror
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label for="parent" class="form-label">Parent list</label>
+                <select class="form-control @error('parent') is-invalid @enderror" name="parent" id="parent" required>
+                  <option value="1" selected>{{ config('app.footer.title01') }}</option>
+                  <option value="2">{{ config('app.footer.title02') }}</option>
+                </select>
+                @error('parent')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+              <div class="col-md-6 @error('url') @else d-none @enderror" id="linkURL">
+                <label for="url" class="form-label">URL</label>
+                <input type="url" class="form-control @error('url') is-invalid @enderror" id="url" name="url" value="{{ $errors->any() ? old('url') : '' }}" placeholder="URL">
+                @error('url')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+              <div class="col-md-6 @error('category') @else d-none @enderror" id="linkCategory">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-control @error('category') is-invalid @enderror" name="category" id="category">
+                  @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                  @endforeach
+                </select>
+                @error('category')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
             </div>
             <button type="submit" class="btn btn-primary">Create</button>
           </form>
@@ -145,32 +115,24 @@
     <div class="col-md-12 dashboard-col">
       <div class="dashboard-card">
         <div class="card-header">
-          <h5 class="card-header-title">Navbar links <span class="badge bg-secondary">Top</span></h5>
+          <h5 class="card-header-title">Footer links <span class="badge bg-secondary">Highlights</span></h5>
         </div>
         <div class="card-body">
-          <table id="topLinksTable" class="table table-striped" style="width:100%">
+          <table id="footer01LinksTable" class="table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Link</th>
-                <th>Parent</th>
                 <th>Type</th>
                 <th>URL</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($links_top as $link)
+              @foreach($links01 as $link)
                 <tr>
                   <td>{{ $link->id }}</td>
                   <td>{{ $link->title }}</td>
-                  <td>
-                    @if ($link->link_id != NULL)
-                      <span>{{ $link->parent->title }}</span>
-                    @else
-                      <span class="text-muted">None</span>
-                    @endif
-                  </td>
                   <td>@if ($link->type == 'url') URL @elseif ($link->type == 'category') Category @else Dropdown @endif</td>
                   <td>
                     @if ($link->type != 'dropdown')
@@ -193,7 +155,6 @@
               <tr>
                 <th>#</th>
                 <th>Link</th>
-                <th>Parent</th>
                 <th>Type</th>
                 <th>URL</th>
                 <th>Actions</th>
@@ -206,32 +167,24 @@
     <div class="col-md-12 dashboard-col">
       <div class="dashboard-card">
         <div class="card-header">
-          <h5 class="card-header-title">Navbar links <span class="badge bg-secondary">Center</span></h5>
+          <h5 class="card-header-title">Footer links <span class="badge bg-secondary">Useful</span></h5>
         </div>
         <div class="card-body">
-          <table id="centerLinksTable" class="table table-striped" style="width:100%">
+          <table id="footer02LinksTable" class="table table-striped" style="width:100%">
             <thead>
               <tr>
                 <th>#</th>
                 <th>Link</th>
-                <th>Parent</th>
                 <th>Type</th>
                 <th>URL</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($links_center as $link)
+              @foreach($links02 as $link)
                 <tr>
                   <td>{{ $link->id }}</td>
                   <td>{{ $link->title }}</td>
-                  <td>
-                    @if ($link->link_id != NULL)
-                      <span>{{ $link->parent->title }}</span>
-                    @else
-                      <span class="text-muted">None</span>
-                    @endif
-                  </td>
                   <td>@if ($link->type == 'url') URL @elseif ($link->type == 'category') Category @else Dropdown @endif</td>
                   <td>
                     @if ($link->type != 'dropdown')
@@ -254,7 +207,6 @@
               <tr>
                 <th>#</th>
                 <th>Link</th>
-                <th>Parent</th>
                 <th>Type</th>
                 <th>URL</th>
                 <th>Actions</th>
@@ -270,8 +222,8 @@
 @section('scripts')
   <script>
     $(document).ready(function () {
-      $('#topLinksTable').DataTable();
-      $('#centerLinksTable').DataTable();
+      $('#footer01LinksTable').DataTable();
+      $('#footer02LinksTable').DataTable();
 
       let linkType = $('#type'), linkParent = $('#parent'), linkPosition = $('#position');
 
@@ -279,20 +231,6 @@
         $('#linkCategory').addClass('d-none');
         $('#linkURL').removeClass('d-none');
       }
-
-      $(linkParent).change(function () {
-        if (linkParent.val() != '0') {
-          $('#type > option:nth-child(3)').remove();
-          $('#position').append($('<option>').attr('id', 'pp').text('Parent position').prop('selected', true));
-          $('#position').prop('disabled', true);
-        } else {
-          if (! $('#type > option:nth-child(3)').length) {
-            $('#type').append($('<option>').val('dropdown').text('Dropdown'));
-          }
-          $('#pp').remove();
-          $('#position').prop('disabled', false);
-        }
-      });
 
       $(linkType).change(function () {
         if (linkType.val() == 'url') {
@@ -304,10 +242,8 @@
         } else {
           $('#linkCategory').addClass('d-none');
           $('#linkURL').addClass('d-none');
-          $('#position > option:nth-child(3)').remove();
         }
       });
-
     });
   </script>
 @endsection

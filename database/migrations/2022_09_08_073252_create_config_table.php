@@ -17,23 +17,22 @@ return new class extends Migration
       Schema::create('config', function (Blueprint $table) {
         $table->string('blog_title');
         $table->string('blog_description');
-        $table->boolean('allow_comments');
-        $table->boolean('allow_register');
-        $table->boolean('allow_search');
-        $table->boolean('fixed_navbar');
+        $table->boolean('allow_comments')->default(1);
+        $table->boolean('allow_register')->default(1);
+        $table->boolean('allow_search')->default(1);
+        $table->boolean('fixed_navbar')->default(1);
+        $table->foreignId('featured_post')->nullable()->constrained('posts');
         $table->string('facebook')->nullable();
         $table->string('instagram')->nullable();
         $table->string('youtube')->nullable();
         $table->string('twitter')->nullable();
+        $table->string('footer01')->default('Highlights');
+        $table->string('footer02')->default('Useful');
       });
 
       DB::table('config')->insert([
         'blog_title' => 'Blog Name',
         'blog_description' => 'Blog description',
-        'allow_comments' => 1,
-        'allow_register' => 1,
-        'allow_search' => 1,
-        'fixed_navbar' => 1,
       ]);
 
     }

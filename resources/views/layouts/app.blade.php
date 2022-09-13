@@ -186,7 +186,7 @@
           <div class="footer-list">
             <h4 class="footer-list-title">World of technology</h4>
             <ul>
-              <li><p>Sed dapibus ipsum eu ante dapibus volutpat, Ut vestibulum risus id urna molestie scelerisque.</p></li>
+              <li><p>{{ config('app.description') }}</p></li>
               <li>
                 @foreach (config('app.sociallinks') as $link)
                   @if (config('app.'.$link) != null)
@@ -199,23 +199,21 @@
         </div>
         <div class="col-lg-4">
           <div class="footer-list">
-            <h4 class="footer-list-title">Highlights</h4>
+            <h4 class="footer-list-title">{{ config('app.footer.title01') }}</h4>
             <ul>
-              <li><a href="#">Advertise</a></li>
-              <li><a href="#">Comunnety</a></li>
-              <li><a href="#">Forum</a></li>
-              <li><a href="#">Jobs</a></li>
+              @foreach (config('app.footer.list01') as $link)
+                <li><a href="{{ $link->type == 'url' ? $link->url : route('categories.show', $link->category) }}" {{ $link->type == 'url' ? 'target="_blank"' : '' }}>{{ $link->title }}</a></li>
+              @endforeach
             </ul>
           </div>
         </div>
         <div class="col-lg-4">
           <div class="footer-list">
-            <h4 class="footer-list-title">Useful</h4>
+            <h4 class="footer-list-title">{{ config('app.footer.title02') }}</h4>
             <ul>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms And Conditions</a></li>
-              <li><a href="#">Contact us</a></li>
-              <li><a href="#">About us</a></li>
+              @foreach (config('app.footer.list02') as $link)
+                <li><a href="{{ $link->type == 'url' ? $link->url : route('categories.show', $link->category) }}" {{ $link->type == 'url' ? 'target="_blank"' : '' }}>{{ $link->title }}</a></li>
+              @endforeach
             </ul>
           </div>
         </div>

@@ -60,11 +60,17 @@ class LinkController extends Controller
         $category = $request->category;
       }
 
-      $request->parent == 0 ? $parent = NULL : $parent = $request->parent;
+      if ($request->position != 'footer' && $request->position != NULL) {
+        $request->parent == 0 ? $parent = NULL : $parent = $request->parent;
+        $position = $request->position;
+        $parent_list = NULL;
+      } else {
+        $parent = NULL;
+        $parent_list = $request->parent;
+        $position = 'footer';
+      }
 
-      $position = $request->position;
-
-      if ($parent == NULL) {
+      if ($parent == NULL && $position != 'footer') {
         if ($position == 'navbar') {
           $links = Link::where('link_id', NULL)->where('position', 'navbar')->count();
         } elseif ($position == 'navtop') {
@@ -75,8 +81,7 @@ class LinkController extends Controller
         }
       }
 
-
-      if ($parent != NULL) {
+      if ($parent != NULL && $position != 'footer') {
         $link = Link::findOrFail($parent);
         $position = $link->position;
       }
@@ -84,13 +89,18 @@ class LinkController extends Controller
       Link::create([
         'title' => $request->title,
         'link_id' => $parent,
+        'parent_list' => $parent_list,
         'position' => $position,
         'type' => $request->type,
         'url' => $url,
         'category_id' => $category,
       ]);
 
-      return redirect()->route('config.navbar')->with('success', 'Link created successfully');
+      if ($position == 'footer') {
+        return redirect()->route('config.footer')->with('success', 'Link created successfully');
+      } else {
+        return redirect()->route('config.navbar')->with('success', 'Link created successfully');
+      }
 
     }
 
@@ -152,7 +162,7 @@ class LinkController extends Controller
         $parent = $parent->id;
       }
 
-      if ($parent == NULL) {
+      if ($parent == NULL && $link->parent != NULL) {
         if ($link->position == 'navtop') {
           $links = Link::where('link_id', NULL)->where('position', 'navtop')->count();
         }

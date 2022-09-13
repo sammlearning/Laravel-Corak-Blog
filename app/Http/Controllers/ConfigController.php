@@ -95,4 +95,27 @@ class ConfigController extends Controller
     return redirect()->route('config.navbar')->with('success', 'Navbar options updated successfully');
 
   }
+
+  public function footer_index () {
+    $categories = Category::get();
+    $links01 = Link::where('position', 'footer')->where('parent_list', 1)->get();
+    $links02 = Link::where('position', 'footer')->where('parent_list', 2)->get();
+    return view('dashboard.config.footer', compact('links01', 'links02', 'categories'));
+  }
+
+  public function footer_update (Request $request) {
+
+    $request->validate([
+      'list01' => 'required|string|max:255',
+      'list02' => 'required|string|max:255',
+    ]);
+
+    DB::table('config')->update([
+      'footer01' => $request->list01,
+      'footer02' => $request->list02,
+    ]);
+
+    return redirect()->route('config.footer')->with('success', 'Footer lists updated successfully');
+
+  }
 }

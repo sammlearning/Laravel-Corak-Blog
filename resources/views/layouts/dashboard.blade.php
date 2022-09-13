@@ -78,8 +78,8 @@
               {{-- <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-grid-1x2-fill"></i></span> Sidebar</a>
               </li> --}}
-              <li class="nav-item {{ Route::currentRouteName() == 'users.index' || Route::currentRouteName() == 'users.edit' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('users.index') }}"><span class="dashboard-list-icon"><i class="bi bi-view-list"></i></span> Footer</a>
+              <li class="nav-item {{ Route::currentRouteName() == 'config.footer' ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('config.footer') }}"><span class="dashboard-list-icon"><i class="bi bi-view-list"></i></span> Footer</a>
               </li>
             </ul>
             <ul class="dashboard-list">
