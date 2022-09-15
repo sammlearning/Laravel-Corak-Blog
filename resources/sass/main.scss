@@ -148,50 +148,66 @@ main{
 }
 
 .post {
-  @include card;
-  margin-bottom: 1rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  border-radius: 0 0.5rem 0.5rem 0;
-  .post-img {
-    width: 40%;
-    // border-radius: 0.5rem 0 0 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0px 0px 10px 4px rgb(222 222 222 / 25%);
+  h5 {
+    font-weight: bold;
+    color: #333333;
   }
-  .post-info {
-    color: #555555;
-    padding: 1rem;
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    height: 100%;
-    .post-title {
-      // color: #000000;
-      font-weight: bold;
-    }
-    .post-short-description {
-      margin-bottom: 0.5rem;
-    }
-    .post-categories {
-      color: $primary-color;
-      margin-bottom: 0.5rem;
-    }
-
-    .post-read-more {
-      @include primary_btn;
-      color: $primary-color;
-      background-color: #ffffff;
-    }
-    .post-read-more:hover {
-      @include primary_btn_hover;
-      color: $primary-color-alt;
-      background-color: #ffffff;
-
-    }
+  a {
+    color: $primary-color;
   }
+  .post-thumbnail {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 200px;
+  }
+  // @include card;
+  // margin-bottom: 1rem;
+  // width: 100%;
+  // display: flex;
+  // align-items: center;
+  // border-radius: 0 0.5rem 0.5rem 0;
+  // .post-img {
+  //   width: 40%;
+  //   // border-radius: 0.5rem 0 0 0.5rem;
+  // }
+  // .post-info {
+  //   color: #555555;
+  //   padding: 1rem;
+  //   width: 60%;
+  //   display: flex;
+  //   flex-direction: column;
+  //   flex-wrap: nowrap;
+  //   align-items: flex-start;
+  //   height: 100%;
+  //   .post-title {
+  //     // color: #000000;
+  //     font-weight: bold;
+  //   }
+  //   .post-short-description {
+  //     margin-bottom: 0.5rem;
+  //   }
+  //   .post-categories {
+  //     color: $primary-color;
+  //     margin-bottom: 0.5rem;
+  //   }
+
+  //   .post-read-more {
+  //     @include primary_btn;
+  //     color: $primary-color;
+  //     background-color: #ffffff;
+  //   }
+  //   .post-read-more:hover {
+  //     @include primary_btn_hover;
+  //     color: $primary-color-alt;
+  //     background-color: #ffffff;
+
+  //   }
+  // }
 }
+
 .post:hover {
   .post-title {
     color: $primary-color;
@@ -199,12 +215,13 @@ main{
 }
 
 .sidebar-posts {
-  margin-bottom: 1rem;
   padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
   @include card;
   border: 1px solid #EEEEEE;
   .sidebar-posts-title {
     @include card_title;
+    margin-bottom: 0;
     h5 {
       margin: 0;
     }
@@ -224,6 +241,31 @@ main{
     .post-info .post-title {
       color: $primary-color;
     }
+  }
+}
+
+.sidebar-post {
+  font-size: small;
+  // border-bottom: 1px solid #EEEEEE;
+  margin: 1rem;
+  a {
+    font-weight: bold;
+    color: #333333;
+    h6 {
+      font-size: small;
+    }
+  }
+  .post-thumbnail {
+    // border-radius: 0.5rem 0 0 0.5rem;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+
+.sidebar-post:hover {
+  a {
+    color: $primary-color;
   }
 }
 
@@ -380,5 +422,8 @@ footer {
   .post-date {
     display: flex;
     flex-direction: column;
+  }
+  .sidebar-posts .post-thumbnail {
+    min-height: 175px;
   }
 }

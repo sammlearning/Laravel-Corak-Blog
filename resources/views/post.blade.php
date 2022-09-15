@@ -92,7 +92,7 @@
             </div>
           @endguest
           @foreach ($comments as $comment)
-            <div class="row g-3 comment">
+            <div class="row g-3 comment" id="comment_{{ $comment->id }}">
               <div class="col-auto">
                 <img src="{{ asset($comment->user->image->url_md) }}" class="rounded-circle" alt="">
               </div>
@@ -130,13 +130,14 @@
         <h5>Popular posts</h5>
       </div>
       @foreach ($popular_posts as $post)
-        <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
-          <img class="post-img" src="{{ asset($post->image->url_sm) }}" alt="">
-          <div class="post-info">
-            <b class="post-title">{{ $post->subject }}</b>
-            <span>Published at {{ $post->created_at }}</span>
+        <div class="row g-0 bg-white position-relative sidebar-post">
+          <div class="col-md-4 post-thumbnail" style="background-image: url({{ asset($post->image->url_md) }});"></div>
+          <div class="col-md-8 p-3 p-md-2">
+            <a class="stretched-link text-decoration-none" href="{{ route('posts.show', $post->id) }}"><h6 class="post-title"><b>{{ $post->subject }}</b></h6></a>
+            <p class="m-0 text-muted">Published at {{ $post->created_at->format('Y-m-d') }}</p>
+            <span class="text-muted">By <b>{{ $post->user->name }}</b></span>
           </div>
-        </a>
+        </div>
       @endforeach
     </div>
     <div class="sidebar-posts">
@@ -144,13 +145,14 @@
         <h5>Latest posts</h5>
       </div>
       @foreach ($latest_posts as $post)
-        <a class="post post-small" href="{{ route('posts.show', $post->id) }}">
-          <img class="post-img" src="{{ asset($post->image->url_sm) }}" alt="">
-          <div class="post-info">
-            <b class="post-title">{{ $post->subject }}</b>
-            <span>Published at {{ $post->created_at }}</span>
+        <div class="row g-0 bg-white position-relative sidebar-post">
+          <div class="col-md-4 post-thumbnail" style="background-image: url({{ asset($post->image->url_md) }});"></div>
+          <div class="col-md-8 p-3 p-md-2">
+            <a class="stretched-link text-decoration-none" href="{{ route('posts.show', $post->id) }}"><h6 class="post-title"><b>{{ $post->subject }}</b></h6></a>
+            <p class="m-0 text-muted">Published at {{ $post->created_at->format('Y-m-d') }}</p>
+            <span class="text-muted">By <b>{{ $post->user->name }}</b></span>
           </div>
-        </a>
+        </div>
       @endforeach
     </div>
   </div>

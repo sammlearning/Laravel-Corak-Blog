@@ -9,7 +9,7 @@ class SearchController extends Controller
 {
   public function index(Request $request) {
     $request->validate(['q' => 'string|max:255|required']);
-    $posts = Post::where('subject', 'like', '%'.$request->q.'%')->orderBy('id', 'DESC')->paginate(7);
+    $posts = Post::where('subject', 'like', '%'.$request->q.'%')->orderBy('id', 'DESC')->paginate(6);
     $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');
     $latest_posts = Post::orderByDesc('id')->limit(7)->get();
     $search = $request->q;

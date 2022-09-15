@@ -28,10 +28,13 @@ class BlogConfigServiceProvider extends ServiceProvider
     {
       if (Schema::hasTable('config')) {
         $config = DB::table('config')->first();
-        $links_top = Link::where('position', 'navtop')->get();
-        $links_center = Link::where('position', 'navbar')->get();
-        $list01 = Link::where('position', 'footer')->where('parent_list', 1)->get();
-        $list02 = Link::where('position', 'footer')->where('parent_list', 2)->get();
+        $links_top = $links_center = $list01 = $list02 = NULL;
+        if (Schema::hasTable('links')) {
+          $links_top = Link::where('position', 'navtop')->get();
+          $links_center = Link::where('position', 'navbar')->get();
+          $list01 = Link::where('position', 'footer')->where('parent_list', 1)->get();
+          $list02 = Link::where('position', 'footer')->where('parent_list', 2)->get();
+        }
         config([
           'app.title' => $config->blog_title,
           'app.description' => $config->blog_description,

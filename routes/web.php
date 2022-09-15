@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ConfigController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FeaturedPost;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImageController;
@@ -24,16 +25,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['reset' => false]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('home', [HomeController::class, 'index']);
 
 Route::middleware(['auth', 'admin'])->group(function () {
-  Route::get('dashboard', function () {
-    return view('dashboard.index');
-  })->name('dashboard');
+  Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
   Route::resources([
     'dashboard/posts' => PostController::class,
     'dashboard/categories' => CategoryController::class,

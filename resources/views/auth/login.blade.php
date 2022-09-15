@@ -60,15 +60,13 @@
               <div class="col-md-10 mb-3 mx-auto text-center">
                 <a href="{{ route('home') }}">{{ __('Back to home page') }}</a>
                 <span class="ms-1 me-1">|</span>
-                @if (Route::has('password.request'))
+                {{-- @if (Route::has('password.request'))
                   <a href="{{ route('password.request') }}">{{ __('Forgot Your Password?') }}</a>
+                @endif --}}
+                @if (Route::has('register'))
+                  <a href="{{ route('register') }}">{{ __('Register a new user') }}</a>
                 @endif
               </div>
-              @if (Route::has('register'))
-                <div class="col-md-10 mb-3 mx-auto text-center">
-                  <a href="{{ route('register') }}">{{ __('Register a new user') }}</a>
-                </div>
-              @endif
             </form>
           </div>
         </div>

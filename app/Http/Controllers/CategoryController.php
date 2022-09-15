@@ -67,7 +67,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-      $posts = Category::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(7);
+      $posts = Category::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(6);
       $posts->withPath('/categories/'. $id);
       $category = Category::find($id);
       if ($posts->isEmpty()) {

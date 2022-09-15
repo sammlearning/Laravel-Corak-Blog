@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Link;
 use App\Models\Post;
@@ -21,11 +22,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Category::factory(10)->create();
+        Category::factory(rand(5, 15))->create();
 
         Link::factory(3, ['position' => 'navtop'])->for(Category::all()->random())->create();
 
         Link::factory(8, ['position' => 'navbar'])->for(Category::all()->random())->create();
+
+        Link::factory(8, ['position' => 'footer', 'parent_list' => 1])->for(Category::all()->random())->create();
+
+        Link::factory(5, ['position' => 'footer', 'parent_list' => 2])->for(Category::all()->random())->create();
 
         DB::table('config')->update([
           'blog_title' => 'World Of Technology',
@@ -68,6 +73,10 @@ class DatabaseSeeder extends Seeder
           'url_md' => 'images/project-thumbnail.jpg',
           'url_sm' => 'images/project-thumbnail.jpg',
         ]))->for(User::all()->random())->hasAttached(Category::all()->random(3))->create();
+
+        Comment::factory(rand(5, 10), [
+          'post_id' => User::all()->random(),
+        ])->for(User::all()->random())->create();
 
         DB::table('featured_post')->update([
           'status' => '1',

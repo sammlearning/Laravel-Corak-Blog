@@ -53,7 +53,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-      $posts = User::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(7);
+      $posts = User::findOrFail($id)->posts()->orderBy('id', 'DESC')->paginate(6);
       $posts->withPath('/users/'. $id);
       $user = User::find($id);
       $popular_posts = Post::orderByDesc('id')->withCount('comments')->limit(7)->get()->sortByDesc('comments_count');

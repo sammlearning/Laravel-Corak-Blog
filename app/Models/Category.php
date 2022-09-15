@@ -18,4 +18,8 @@ class Category extends Model {
     return $this->belongsToMany(Post::class);
   }
 
+  public function links() {
+    return $this->hasMany(Link::class);
+  }
+
 }
