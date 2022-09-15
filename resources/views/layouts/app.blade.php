@@ -221,7 +221,7 @@
     </div>
     <div class="footer-copyrights">
       <div class="container">
-        <span>Copyrights 2022-2022 World Of Technology | Powered by Corak LLC</span>
+        <span>Copyright &copy; {{ date('Y') }}, {{ config('app.title') }}, All rights reserved.</span>
       </div>
     </div>
   </footer>

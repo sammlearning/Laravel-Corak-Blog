@@ -46,7 +46,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('dashboard/config/navbar', 'navbar_index')->name('config.navbar');
     Route::post('dashboard/config/navbar', 'navbar_update')->name('config.navbar.update');
     Route::get('dashboard/config/footer', 'footer_index')->name('config.footer');
-    Route::put('dashboard/config/footer', 'footer_update')->name('config.update');
+    Route::put('dashboard/config/footer', 'footer_update')->name('config.footer.update');
   });
   Route::put('dashboard/featured', [FeaturedPost::class, 'update'])->name('post.featured');
 });

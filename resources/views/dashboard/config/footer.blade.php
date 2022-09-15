@@ -22,7 +22,7 @@
           <h5 class="card-header-title">Footer lists</h5>
         </div>
         <div class="card-body">
-          <form action="{{ route('config.footer') }}" method="POST">
+          <form action="{{ route('config.footer.update') }}" method="POST">
             @csrf
             @method('PUT')
             <div class="row mb-2">
