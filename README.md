@@ -41,17 +41,24 @@ Make `.env` file from `.env-example` file.
 
 Create a new database then config your database connection in `.env` file.
 
-Run command below to install vendor files.
+Run `composer install` then run `npm install` to install vendor & node node modules. If you didn't have composer & npm installed on your device you can skip this step by download [vendor_and_node_modules.zip](https://corakdev.com/files/vendor.zip) file and extract it into script main folder.
+
+Run command below to building css & js files.
 
 ``` bash
-composer install
+npm run build
 ```
-If you didn't have composer installed on your device you can download it from [https://getcomposer.org](https://getcomposer.org/) or you can skip this step by download [vendor.zip](https://corakdev.com/files/vendor.zip) and extract it into script main folder.
 
 Run command below to create database structure.
 
 ``` bash
 php artisan migrate --seed
+```
+
+Run command below to generate app key.
+
+``` bash
+php artisan key:generate
 ```
 
 Run command below to create a symlink for storage files.
@@ -60,11 +67,12 @@ Run command below to create a symlink for storage files.
 php artisan storage:link
 ```
 
-Run command below to run the server.
+Run command below to start the server.
 
 ``` bash
 php artisan serve
 ```
+
 Admin login
 - Email: admin@example.com
 - Password: admin
