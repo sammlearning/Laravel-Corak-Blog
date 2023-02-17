@@ -37,16 +37,16 @@ If you are looking for more features you can see [Corak Blog Plus](https://cblog
 
 ## Install Corak Blog
 
+Make `.env` file from `.env-example` file.
+
+Create a new database then config your database connection in `.env` file.
+
 Run command below to install vendor files.
 
 ``` bash
 composer install
 ```
 If you didn't have composer installed on your device you can download it from [https://getcomposer.org](https://getcomposer.org/) or you can skip this step by download [vendor.zip](https://corakdev.com/files/vendor.zip) and extract it into script main folder.
-
-Make `.env` file from `.env-example` file.
-
-Create a new database then config your database connection in `.env` file.
 
 Run command below to create database structure.
 
