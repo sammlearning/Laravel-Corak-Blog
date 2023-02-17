@@ -16,9 +16,28 @@ Corak Blog - Laravel News, Magazines, Articles & Blog CMS Script, Light & Dark t
 
 If you are looking for more features you can see [Corak Blog Plus](https://cblog.corakdev.com/docs). It's a premium version of Corak Blog.
 
+## Server Requirements
+
+- PHP >= 8.1
+- MySQL >= 5.7.7
+- Ctype PHP Extension
+- cURL PHP Extension
+- DOM PHP Extension
+- Fileinfo PHP Extension
+- Filter PHP Extension
+- Hash PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PCRE PHP Extension
+- PDO PHP Extension
+- Session PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+- PHP GD Extension
+
 ## Install Corak Blog
 
-You need to config your database connection in `.env` file then create a new database.
+You need to create a new database then config your database connection in `.env` file.
 
 Run command below to create database structure.
 
@@ -37,6 +56,11 @@ Run command below to run the server.
 ``` bash
 php artisan serve
 ```
+Admin login
+- Email: admin@example.com
+- Password: admin
+
+Now you are ready to go
 
 ## Support
 

@@ -12,6 +12,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -54,9 +55,10 @@ class DatabaseSeeder extends Seeder
           'url_md' => 'images/profile.png',
           'url_sm' => 'images/profile.png',
         ]))->create([
-          'name' => 'Ahmed Nabil',
+          'name' => 'Admin Account',
           'is_admin' => '1',
-          'email' => 'ahmed.nabil.home@gmail.com',
+          'email' => 'admin@example.com',
+          'password' => Hash::make('admin'),
         ]);
 
         // Featured Post
