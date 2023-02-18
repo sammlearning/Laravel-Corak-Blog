@@ -37,6 +37,8 @@ If you are looking for more features you can see [Corak Blog Plus](https://cblog
 
 ## Install Corak Blog
 
+Video tutorial: [https://www.youtube.com/watch?v=61JbinzYX8c](https://www.youtube.com/watch?v=61JbinzYX8c)
+
 Make `.env` file from `.env-example` file.
 
 Create a new database then config your database connection in `.env` file.
