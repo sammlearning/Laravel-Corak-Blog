@@ -43,13 +43,7 @@ Make `.env` file from `.env-example` file.
 
 Create a new database then config your database connection in `.env` file.
 
-Run `composer install` then run `npm install` to install vendor & node modules. If you didn't have composer & npm installed on your device you can skip this step by download [vendor_and_node_modules.zip](https://corakdev.com/files/vendor_and_node_modules.zip) file and extract it into script main folder.
-
-Run command below to building css & js files.
-
-``` bash
-npm run build
-```
+Run `composer install` command then run `npm install` command to install vendor & node modules, then run `npm run build` command to building css & js files. If you didn't have composer & npm installed on your device you can skip this step by download [vendor_and_node_modules.zip](https://corakdev.com/files/vendor_and_node_modules.zip) file and extract it into script main folder.
 
 Run command below to create database structure.
 
